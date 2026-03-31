@@ -1,30 +1,22 @@
-import { StyleSheet } from 'react-native';
+import { useTheme } from '@/src/context/ThemeContext';
+import { ScrollView, StyleSheet } from 'react-native';
 import { Text } from 'react-native';
+import Topbar from '../../src/components/navigation/topbar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
+  const { theme } = useTheme();  
+
+
   return (
-    <SafeAreaView>
-      <Text className='text-white'>Hello</Text>
+    <SafeAreaView edges={['top']} style={{ backgroundColor: theme.background, minHeight: "100%" }} className='px-4'>
+        <ScrollView showsVerticalScrollIndicator={false} style={{margin: 0, padding: 0}}>
+          <Topbar />
+        </ScrollView>     
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
+
 });
