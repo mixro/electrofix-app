@@ -13,8 +13,10 @@ export default function Topbar() {
   return (
     <View className="flex-row" style={styles.topbar}>
         <Text style={[{ color: theme.text }, styles.logo]}>
-          INSTiWISE
+          ELECTRO
+          <Text style={{color: theme.red_button}}>FiX</Text>
         </Text>
+        
         <TouchableOpacity onPress={() => (
           isDrawerOpen
             ? navigation.dispatch(DrawerActions.closeDrawer())
@@ -30,10 +32,11 @@ const styles = StyleSheet.create({
   topbar: {
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: 8
+    paddingVertical: 8,
+    display: "flex"
   },
   logo: {
-    fontWeight: "600",
+    fontWeight: '600',
     fontSize: 20,
   }
 })

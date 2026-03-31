@@ -12,6 +12,8 @@ export default function HomeScreen() {
     <SafeAreaView edges={['top']} style={{ backgroundColor: theme.background, minHeight: "100%" }} className='px-4'>
         <ScrollView showsVerticalScrollIndicator={false} style={{margin: 0, padding: 0}}>
           <Topbar />
+
+          <Text className="font-black">Hello</Text>
         </ScrollView>     
     </SafeAreaView>
   );
