@@ -49,7 +49,7 @@ export default function TabLayout() {
         <Tabs.Screen
           name="problemSolver"
           options={{
-            title: 'Calendar',
+            title: 'Fault Fixing',
             tabBarIcon: ({ color }) => <Entypo name="tools" color={color} size={20} />,
             tabBarLabel: ({ focused }) => (
               <Text
@@ -64,7 +64,7 @@ export default function TabLayout() {
         <Tabs.Screen
           name="suppliers"
           options={{
-            title: 'Projects',
+            title: 'Suppliers',
             tabBarIcon: ({ color }) => <MaterialCommunityIcons name="truck-delivery" size={20} color={color} />,
             tabBarLabel: ({ focused }) => (
               <Text
