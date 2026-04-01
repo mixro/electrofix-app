@@ -1,13 +1,46 @@
 import { useTheme } from '@/src/context/ThemeContext';
-import { ScrollView, StyleSheet } from 'react-native';
+import { Dimensions, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native';
 import Topbar from '../../src/components/navigation/topbar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AppCarousel from '@/src/components/ui/appCarousel';
+import { FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function HomeScreen() {
   const { theme } = useTheme();  
 
+  const categories = [
+    {
+      title: "Components",
+      desc: "Explore electrical parts, symbols, functions, and maintenance tips.",
+      icon: <MaterialCommunityIcons name="cog" size={32} color="#E31E24" />,
+    },
+    {
+      title: "Problem Solver",
+      desc: "Diagnose faults with step-by-step troubleshooting and safety guides.",
+      icon: <MaterialCommunityIcons name="wrench" size={32} color="#E31E24" />,
+    },
+    {
+      title: "Where to Buy",
+      desc: "Locate trusted suppliers near you with pricing and contact details.",
+      icon: <MaterialCommunityIcons name="cart" size={32} color="#E31E24" />,
+    },
+    {
+      title: "Learn Electrical",
+      desc: "Master electrical theory, wiring practices, and safety standards.",
+      icon: <MaterialCommunityIcons name="book" size={32} color="#E31E24" />,
+    },
+    {
+      title: "Technicians",
+      desc: "Connect with certified professionals and available local services.",
+      icon: <FontAwesome5 name="users" size={28} color="#E31E24" />,
+    },
+    {
+      title: "About & Contact",
+      desc: "App information, developer contact, feedback, and disclaimers.",
+      icon: <Ionicons name="information-circle" size={34} color="#E31E24" />,
+    },
+  ];
 
   return (
     <SafeAreaView edges={['top']} style={{ backgroundColor: theme.background, minHeight: "100%" }} className='px-4'>
@@ -16,14 +49,50 @@ export default function HomeScreen() {
 
           <AppCarousel />
 
-          
+          <View className="flex-1 px-0 py-6">
+            <Text style={{color: theme.text}} className="text-center text-2xl font-bold tracking-widest text-black mb-8">
+              ALL COVERED
+            </Text>
 
-          <Text className="font-black">Hello</Text>
+            <View className="flex-row flex-wrap justify-between">
+              {categories.map((item, index) => (
+                <TouchableOpacity 
+                  key={index} 
+                  activeOpacity={0.7}
+                  style={[styles.card, { width: '47%',  backgroundColor: theme.background, borderColor: theme.toast_background, shadowColor: theme.text}]}
+                  className="mx-1 rounded-2xl p-4 mb-4 items-center border"
+                >
+                  <View className="mb-3 h-10 justify-center">
+                    {item.icon}
+                  </View>
+
+                  <Text style={{color: theme.text}} className="text-[15px] font-bold text-center mb-1">
+                    {item.title}
+                  </Text>
+
+                  <Text 
+                    style={{color: theme.gray_text}}
+                    className="text-[12px] text-gray-500 text-center leading-4"
+                    numberOfLines={4}
+                  >
+                    {item.desc}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+
+          <Text className="font-bold text-lg text-center mb-3">© ElectroFix</Text>
         </ScrollView>     
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-
+  card: {
+    elevation: 4,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+  },
 });
