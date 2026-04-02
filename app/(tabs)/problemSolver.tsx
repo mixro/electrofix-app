@@ -103,7 +103,7 @@ export default function problemSolver() {
                       style={[styles.categoryCard, { backgroundColor: theme.cards_background || '#f8f8f8', borderColor: theme.border }]}
                       activeOpacity={0.85}
                     >
-                      <Link href={`/category/${cat.title}` as any} asChild>
+                      <Link href={`/problemSolver/category/${cat.title}` as any} asChild>
                         <Pressable>
                           <View style={styles.categoryIcon}>{cat.icon}</View>
                           <Text style={[styles.categoryTitle, { color: theme.text }]}>{cat.title}</Text>

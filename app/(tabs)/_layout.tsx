@@ -126,6 +126,27 @@ export default function TabLayout() {
             headerShown: false,
           }}
         />
+        <Tabs.Screen
+          name="problemSolver/[id]"
+          options={{
+            href: null,
+            headerShown: false,
+          }}
+        />
+        <Tabs.Screen
+          name="problemSolver/category/[id]"
+          options={{
+            href: null,
+            headerShown: false,
+          }}
+        />
+        <Tabs.Screen
+          name="problemSolver/solution/[id]"
+          options={{
+            href: null,
+            headerShown: false,
+          }}
+        />
     </Tabs>
   );
 }
