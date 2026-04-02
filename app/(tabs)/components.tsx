@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, ScrollView, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TextInput, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '@/src/context/ThemeContext';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import ComponentCard from '@/src/components/ui/componentCard';
+import { Link } from 'expo-router';
 
 // Import images (you can replace with remote URLs later via Firebase Storage)
 const siemensPLC = require('@/assets/photos/breaker.png'); // add your images
@@ -92,8 +93,12 @@ export default function components() {
                 style={[styles.categoryCard, { backgroundColor: theme.cards_background || '#f8f8f8', borderColor: theme.border }]}
                 activeOpacity={0.85}
               >
-                <View style={styles.categoryIcon}>{cat.icon}</View>
-                <Text style={[styles.categoryTitle, { color: theme.text }]}>{cat.title}</Text>
+                <Link href={`/category/${cat.title}` as any} asChild>
+                  <Pressable>
+                    <View style={styles.categoryIcon}>{cat.icon}</View>
+                    <Text style={[styles.categoryTitle, { color: theme.text }]}>{cat.title}</Text>
+                  </Pressable>
+                </Link>
               </TouchableOpacity>
             ))}
           </View>

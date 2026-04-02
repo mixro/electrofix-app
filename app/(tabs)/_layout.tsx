@@ -83,6 +83,13 @@ export default function TabLayout() {
             headerShown: false,
           }}
         />
+        <Tabs.Screen
+          name="category/[id]"
+          options={{
+            href: null,
+            headerShown: false,
+          }}
+        />
     </Tabs>
   );
 }
