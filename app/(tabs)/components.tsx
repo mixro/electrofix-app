@@ -113,13 +113,10 @@ export default function components() {
           renderItem={({ item }) => 
               <ComponentCard
                   key={item.id}
+                  id={item.id}
                   name={item.name}
                   category={item.category}
                   image={item.image}
-                  onPress={() => {
-                      // TODO: Navigate to component detail screen
-                      console.log(`Opened: ${item.name}`);
-                  }}
               />
           }
           contentContainerStyle={styles.listContent}

@@ -90,6 +90,13 @@ export default function TabLayout() {
             headerShown: false,
           }}
         />
+        <Tabs.Screen
+          name="component/[id]"
+          options={{
+            href: null,
+            headerShown: false,
+          }}
+        />
     </Tabs>
   );
 }

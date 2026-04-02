@@ -1,38 +1,42 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, Pressable } from 'react-native';
 import { useTheme } from '@/src/context/ThemeContext';
+import { Link } from 'expo-router';
 
 type ComponentCardProps = {
-  name: string;
-  category: string;
-  image: any;           // Use require() or { uri: '...' } later
-  onPress?: () => void;
+    id: string;
+    name: string;
+    category: string;
+    image: any;    
 };
 
-export default function ComponentCard({ name, category, image, onPress }: ComponentCardProps) {
+export default function ComponentCard({ id, name, category, image }: ComponentCardProps) {
   const { theme } = useTheme();
 
   return (
     <TouchableOpacity 
-      activeOpacity={0.8}
-      onPress={onPress}
-      style={[styles.card, { backgroundColor: theme.cards_background || theme.background, borderColor: theme.border, shadowColor: theme.text }]}
+        activeOpacity={0.8}
+        style={[styles.card, { backgroundColor: theme.cards_background || theme.background, borderColor: theme.border, shadowColor: theme.text }]}
     >
-      <View style={styles.imageContainer}>
-        <Image 
-            source={image} 
-            style={styles.image}
-            resizeMode="contain"
-        />
-      </View>
-      <View style={[styles.info, {backgroundColor: theme.background}]}>
-        <Text style={[styles.name, { color: theme.text }]} numberOfLines={1}>
-          {name}
-        </Text>
-        <Text style={[styles.category, { color: theme.gray_text }]}>
-          {category}
-        </Text>
-      </View>
+        <Link href={`/component/${id}` as any} asChild>
+            <Pressable>
+                <View style={styles.imageContainer}>
+                    <Image 
+                        source={image} 
+                        style={styles.image}
+                        resizeMode="contain"
+                    />
+                </View>
+                <View style={[styles.info, {backgroundColor: theme.background}]}>
+                    <Text style={[styles.name, { color: theme.text }]} numberOfLines={1}>
+                        {name}
+                    </Text>
+                    <Text style={[styles.category, { color: theme.gray_text }]}>
+                        {category}
+                    </Text>
+                </View>
+            </Pressable>
+        </Link>
     </TouchableOpacity>
   );
 }
