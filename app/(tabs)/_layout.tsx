@@ -76,13 +76,7 @@ export default function TabLayout() {
             ),
           }}
         />
-        <Tabs.Screen
-          name="technicians"
-          options={{
-            href: null,
-            headerShown: false,
-          }}
-        />
+        
         <Tabs.Screen
           name="category/[id]"
           options={{
