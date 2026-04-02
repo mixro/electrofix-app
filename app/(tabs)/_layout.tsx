@@ -41,7 +41,7 @@ export default function TabLayout() {
                 className={focused ? 'font-bold' : ''}
                 style={{ color: focused ? theme.tabActiveTint : theme.tabInactiveTint, fontSize: 12 }}
               >
-                Components
+                Products
               </Text>
             ),
           }}
@@ -56,7 +56,22 @@ export default function TabLayout() {
                 className={focused ? 'font-bold' : ''}
                 style={{ color: focused ? theme.tabActiveTint : theme.tabInactiveTint, fontSize: 12 }}
               >
-                Faults Fixing
+                Faults
+              </Text>
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="technicians"
+          options={{
+            title: 'Technicians',
+            tabBarIcon: ({ color }) => <MaterialCommunityIcons name="account-wrench" size={20} color={color} />,
+            tabBarLabel: ({ focused }) => (
+              <Text
+              className={focused ? 'font-bold' : ''}
+              style={{ color: focused ? theme.tabActiveTint : theme.tabInactiveTint, fontSize: 12 }}
+              >
+                Technicians
               </Text>
             ),
           }}
@@ -79,6 +94,13 @@ export default function TabLayout() {
         
         <Tabs.Screen
           name="category/[id]"
+          options={{
+            href: null,
+            headerShown: false,
+          }}
+        />
+        <Tabs.Screen
+          name="technician/[id]"
           options={{
             href: null,
             headerShown: false,

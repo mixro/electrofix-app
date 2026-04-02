@@ -21,7 +21,7 @@ export default function TechnicianCard({ name, role, location, specialty, experi
       activeOpacity={0.9}
       style={[styles.card, { backgroundColor: theme.secondary_background, borderColor: theme.light_gray }]}
     >
-        <Link href={`/supplier/${name}` as any} asChild>
+        <Link href={`/technician/${name}` as any} asChild>
             <Pressable>
                 <View style={styles.mainRow}>
                     <Image source={avatar} style={styles.avatar} />
