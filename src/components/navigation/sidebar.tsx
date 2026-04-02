@@ -43,7 +43,7 @@ export default function sidebar() {
             </Link>
         </View>
         
-        <Text className='text-lg font-semibold mb-7' style={{color: theme.text}}>Authenticate</Text>
+        {/* <Text className='text-lg font-semibold mb-7' style={{color: theme.text}}>Authenticate</Text>
 
         <View style={{marginBottom: 30}}>
             <Link href='/' className='mb-3'>
@@ -65,7 +65,16 @@ export default function sidebar() {
                 <AntDesign name="logout" size={24} color="black" />
                 <Text className='text-lg font-bold' style={{color: "black"}}>logout</Text>
             </TouchableOpacity>
-        </View>
+        </View> */}
+
+        <Text className='text-lg font-semibold mb-7' style={{color: theme.text}}>About</Text>
+
+        <Link href='/(tabs)/about' className='mb-10'>
+            <View className='flex-row items-center gap-5' style={[{backgroundColor: "#fdc200ff"}, styles.item]}>
+                <Entypo name="info-with-circle" size={24} color="black" />
+                <Text className='text-lg font-bold' style={{color: "black"}}>About</Text>
+            </View>
+        </Link>
     </View>
   )
 }

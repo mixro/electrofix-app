@@ -91,7 +91,6 @@ export default function TabLayout() {
             ),
           }}
         />
-        
         <Tabs.Screen
           name="category/[id]"
           options={{
@@ -115,6 +114,13 @@ export default function TabLayout() {
         />
         <Tabs.Screen
           name="supplier/[id]"
+          options={{
+            href: null,
+            headerShown: false,
+          }}
+        />
+        <Tabs.Screen
+          name="about"
           options={{
             href: null,
             headerShown: false,

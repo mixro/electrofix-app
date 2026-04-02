@@ -71,7 +71,7 @@ export default function SupplierDetailScreen() {
             </View>
 
             {/* Details & Contacts Card */}
-            <View style={[styles.infoCard, { backgroundColor: theme.inputs_bg }]}>
+            <View style={[styles.infoCard, { backgroundColor: theme.light_bg }]}>
                 <Text style={[styles.cardTitle, { color: theme.blue_text }]}>Details</Text>
                 <DetailRow label="Available" value="08:00 – 19:00" />
                 <DetailRow label="Address" value="P.O Box 234 Dar es Salaam" />
