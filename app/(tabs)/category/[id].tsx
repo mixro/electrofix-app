@@ -1,12 +1,13 @@
 import { View, Text, ScrollView, FlatList, StyleSheet } from 'react-native'
 import React from 'react'
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTheme } from '@/src/context/ThemeContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ComponentCard from '@/src/components/ui/componentCard';
 
 export default function category() {
     const { theme } = useTheme();
+    const router = useRouter();
     const { id } = useLocalSearchParams<{ id: string }>();
 
     const siemensPLC = require('@/assets/photos/breaker.png'); // add your images
@@ -53,6 +54,14 @@ export default function category() {
                     name={item.name}
                     category={item.category}
                     image={item.image}
+                    onPress={() => {
+                    router.push({
+                      pathname: '/component/[id]',
+                      params: { 
+                        id: item.id,
+                      }
+                    });
+                  }}
                 />
             }
             contentContainerStyle={styles.listContent}

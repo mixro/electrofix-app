@@ -19,7 +19,7 @@ export default function About() {
           />
           <View style={styles.brandTextContainer}>
             <Text style={[styles.brandName, { color: theme.text }]}>
-              ELECTRO<Text style={{ color: theme.red_button }}>FIX</Text>
+              ELECTRO<Text style={{ color: theme.red_button }}>FiX</Text>
             </Text>
             <Text style={[styles.handle, { color: theme.gray_text }]}>@Karebu_Electronics</Text>
           </View>

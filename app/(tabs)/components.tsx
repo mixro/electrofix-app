@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '@/src/context/ThemeContext';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import ComponentCard from '@/src/components/ui/componentCard';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 
 // Import images (you can replace with remote URLs later via Firebase Storage)
 const siemensPLC = require('@/assets/photos/breaker.png'); // add your images
@@ -16,6 +16,7 @@ const generator = require('@/assets/photos/generator.png');
 
 export default function components() {
   const { theme } = useTheme();
+  const router = useRouter();
 
   const categories = [
     {
@@ -117,6 +118,16 @@ export default function components() {
                   name={item.name}
                   category={item.category}
                   image={item.image}
+                  onPress={() => {
+                    router.push({
+                      pathname: '/component/[id]',
+                      params: { 
+                        id: item.id,
+                        name: item.name, 
+                        category: item.category 
+                      }
+                    });
+                  }}
               />
           }
           contentContainerStyle={styles.listContent}
@@ -127,7 +138,7 @@ export default function components() {
 
 const styles = StyleSheet.create({
   searchContainer: {
-    paddingTop: 12,
+    paddingTop: 20,
     paddingBottom: 8,
   },
   searchSection: {
@@ -153,12 +164,11 @@ const styles = StyleSheet.create({
   },
 
   section: {
-    marginTop: 24,
+    marginTop: 20,
   },
   sectionTitle: {
     fontSize: 22,
     fontWeight: '800',
-    marginTop: 10,
     marginBottom: 25,
   },
 

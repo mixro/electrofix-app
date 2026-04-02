@@ -15,13 +15,13 @@ const data = [
     title: "Suppliers",
     description: "Explore various electrical components & Devices in different categories.",
     image: require('@/assets/photos/generator.png'), // The Predator generator image
-    color: '#4A5568' 
+    color: '#02404b' 
   },
   {
     title: "Technicians",
     description: "Explore various electrical components & Devices in different categories.",
     image: require('@/assets/photos/generator.png'), // The Predator generator image
-    color: '#4A5568' 
+    color: '#3e3f00' 
   },
   // ... more items
 ];
