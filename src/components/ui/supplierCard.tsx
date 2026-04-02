@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@/src/context/ThemeContext';
+import { Link } from 'expo-router';
 
 interface SupplierProps {
   name: string;
@@ -22,20 +23,24 @@ export default function SupplierCard({ name, location, description, avatar }: Su
         }
       ]}
     >
-      <View style={styles.topRow}>
-        <Image source={avatar} style={styles.avatar} />
-        <View style={styles.headerText}>
-          <Text style={[styles.name, { color: theme.text }]} numberOfLines={1}>
-            {name}
-          </Text>
-          <View style={[styles.locationBadge, { backgroundColor: theme.background }]}>
-            <Ionicons name="location" size={12} color={theme.blue_text} />
-            <Text style={[styles.locationText, { color: theme.blue_text }]}>
-              {location}
-            </Text>
-          </View>
-        </View>
-      </View>
+        <Link href={`/supplier/${name}` as any} asChild>
+            <Pressable>
+                <View style={styles.topRow}>
+                    <Image source={avatar} style={styles.avatar} />
+                    <View style={styles.headerText}>
+                    <Text style={[styles.name, { color: theme.text }]} numberOfLines={1}>
+                        {name}
+                    </Text>
+                    <View style={[styles.locationBadge, { backgroundColor: theme.background }]}>
+                        <Ionicons name="location" size={12} color={theme.blue_text} />
+                        <Text style={[styles.locationText, { color: theme.blue_text }]}>
+                        {location}
+                        </Text>
+                    </View>
+                    </View>
+                </View>
+            </Pressable>
+        </Link>
 
       <Text style={[styles.description, { color: theme.gray_text }]} numberOfLines={2}>
         {description}
