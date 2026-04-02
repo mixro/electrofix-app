@@ -74,9 +74,10 @@ const styles = StyleSheet.create({
   },
   mainTitle: {
     fontSize: 22,
-    fontWeight: '900',
+    fontWeight: '800',
     color: '#000',
     marginBottom: 15,
+    marginTop: 10
   },
   introText: {
     fontSize: 16,

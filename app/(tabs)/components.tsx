@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, TextInput, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
+import { View, Text, ScrollView, TextInput, StyleSheet, TouchableOpacity, Pressable, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '@/src/context/ThemeContext';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
@@ -51,86 +51,85 @@ export default function components() {
   ];
 
   const featured = [
-    { id: 1, name: "Siemens PLC", category: "Control & Automation", image: siemensPLC },
-    { id: 2, name: "Inverter", category: "Power Component", image: inverter },
-    { id: 3, name: "Contactor", category: "Power Component", image: contactor },
-    { id: 4, name: "Motor", category: "Electrical Machine", image: motor },
-    { id: 5, name: "Relay", category: "Protection Device", image: relay },
-    { id: 6, name: "Generator", category: "Electrical Machine", image: generator },
+      { id: '1', name: "Siemens PLC", category: "Control & Automation", image: siemensPLC },
+      { id: '2', name: "Inverter", category: "Power Component", image: inverter },
+      { id: '3', name: "Contactor", category: "Power Component", image: contactor },
+      { id: '4', name: "Motor", category: "Electrical Machine", image: motor },
+      { id: '5', name: "Relay", category: "Protection Device", image: relay },
+      { id: '6', name: "Generator", category: "Electrical Machine", image: generator },
   ];
 
   return (
-    <SafeAreaView 
-      edges={['top']} 
-      style={{ backgroundColor: theme.background, flex: 1 }}
-    >
-      <ScrollView 
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 30 }}
-      >
-        {/* Search Bar */}
-        <View style={styles.searchContainer}>
-          <View style={[styles.searchSection, { borderColor: theme.text }]}>
-            <TextInput
-              style={[styles.input, { color: theme.text }]}
-              placeholder="Search componets..."
-              placeholderTextColor={theme.gray_text}
-            />
-            <View style={[styles.iconCircle, { backgroundColor: theme.text }]}>
-              <Ionicons name="search" size={24} color={theme.background} />
+    <SafeAreaView  edges={['top']}  style={{ backgroundColor: theme.background, flex: 1 }} className='px-4'>
+      <FlatList
+          data={featured}
+          keyExtractor={(item) => item.id}
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
+          columnWrapperStyle={styles.row}
+          ListHeaderComponent={() => (
+            <View>
+              {/* Search Bar */}
+              <View style={styles.searchContainer}>
+                <View style={[styles.searchSection, { borderColor: theme.text }]}>
+                  <TextInput
+                    style={[styles.input, { color: theme.text }]}
+                    placeholder="Search componets..."
+                    placeholderTextColor={theme.gray_text}
+                  />
+                  <View style={[styles.iconCircle, { backgroundColor: theme.text }]}>
+                    <Ionicons name="search" size={24} color={theme.background} />
+                  </View>
+                </View>
+              </View>
+
+              {/* Categories Section */}
+              <View style={styles.section}>
+                <Text style={[styles.sectionTitle, { color: theme.text }]}>Categories</Text>
+                
+                <View style={styles.categoriesGrid}>
+                  {categories.map((cat, index) => (
+                    <TouchableOpacity 
+                      key={index}
+                      style={[styles.categoryCard, { backgroundColor: theme.cards_background || '#f8f8f8', borderColor: theme.border }]}
+                      activeOpacity={0.85}
+                    >
+                      <Link href={`/category/${cat.title}` as any} asChild>
+                        <Pressable>
+                          <View style={styles.categoryIcon}>{cat.icon}</View>
+                          <Text style={[styles.categoryTitle, { color: theme.text }]}>{cat.title}</Text>
+                        </Pressable>
+                      </Link>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+
+                <Text style={[styles.sectionTitle, { color: theme.text, marginTop: 40 }]}>
+                  Featured Components
+                </Text>
+              </View>
             </View>
-          </View>
-        </View>
-
-        {/* Categories Section */}
-        <View style={styles.section}>
-          <Text style={[styles.sectionTitle, { color: theme.text }]}>Categories</Text>
-          
-          <View style={styles.categoriesGrid}>
-            {categories.map((cat, index) => (
-              <TouchableOpacity 
-                key={index}
-                style={[styles.categoryCard, { backgroundColor: theme.cards_background || '#f8f8f8', borderColor: theme.border }]}
-                activeOpacity={0.85}
-              >
-                <Link href={`/category/${cat.title}` as any} asChild>
-                  <Pressable>
-                    <View style={styles.categoryIcon}>{cat.icon}</View>
-                    <Text style={[styles.categoryTitle, { color: theme.text }]}>{cat.title}</Text>
-                  </Pressable>
-                </Link>
-              </TouchableOpacity>
-            ))}
-          </View>
-        </View>
-
-        {/* Featured Components */}
-        <View style={styles.section}>
-          <Text style={[styles.sectionTitle, { color: theme.text }]}>Featured Components</Text>
-          
-          <View style={styles.featuredGrid}>
-            {featured.map((item) => (
+          )}
+          renderItem={({ item }) => 
               <ComponentCard
-                key={item.id}
-                name={item.name}
-                category={item.category}
-                image={item.image}
-                onPress={() => {
-                  // TODO: Navigate to component detail screen
-                  console.log(`Opened: ${item.name}`);
-                }}
+                  key={item.id}
+                  name={item.name}
+                  category={item.category}
+                  image={item.image}
+                  onPress={() => {
+                      // TODO: Navigate to component detail screen
+                      console.log(`Opened: ${item.name}`);
+                  }}
               />
-            ))}
-          </View>
-        </View>
-      </ScrollView>
+          }
+          contentContainerStyle={styles.listContent}
+      />      
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   searchContainer: {
-    paddingHorizontal: 16,
     paddingTop: 12,
     paddingBottom: 8,
   },
@@ -157,14 +156,13 @@ const styles = StyleSheet.create({
   },
 
   section: {
-    paddingHorizontal: 16,
     marginTop: 24,
   },
   sectionTitle: {
     fontSize: 22,
     fontWeight: '800',
     marginTop: 10,
-    marginBottom: 30,
+    marginBottom: 25,
   },
 
   categoriesGrid: {
@@ -197,5 +195,11 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     paddingHorizontal: 2,
+  },
+  listContent: {
+    paddingBottom: 20,
+  },
+  row: {
+    justifyContent: 'space-between',
   },
 });
