@@ -11,9 +11,9 @@ export type Component = {
   function: string;
   workingPrinciple: string;
   ratings: {
-    voltage: string;
-    current: string;
-    power: string;
+    voltage?: string;
+    current?: string;
+    power?: string;
     speed?: string;
     efficiency?: string;
   };

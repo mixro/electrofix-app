@@ -23,6 +23,13 @@ export const categories: Category[] = [
     iconName: "robot-industrial",
   },
   {
+    id: "cables-accessories",
+    title: "Cables & Accessories",
+    slug: "cables-accessories",
+    description: "Power cables, control cables, wiring accessories, and connectors",
+    iconName: "cable-data",
+  },
+  {
     id: "protection-devices",
     title: "Protection Devices",
     slug: "protection-devices",
@@ -35,12 +42,5 @@ export const categories: Category[] = [
     slug: "instrumentation",
     description: "Sensors, transducers, measuring instruments, and control devices",
     iconName: "gauge",
-  },
-  {
-    id: "cables-accessories",
-    title: "Cables & Accessories",
-    slug: "cables-accessories",
-    description: "Power cables, control cables, wiring accessories, and connectors",
-    iconName: "cable-data",
   },
 ];
