@@ -1,12 +1,12 @@
 import { Component } from "../types";
 
-export const components: Component[] = [
+export const componentsData: Component[] = [
   {
     id: "motor-3phase-squirrel",
     name: "3-Phase Squirrel Cage Induction Motor",
     slug: "3-phase-squirrel-cage-induction-motor",
     category: "Electrical Machines",
-    imageUrl: "https://your-domain.com/images/motors/3phase-motor.jpg", // remote
+    imageUrl: "https://savree-storage.s3.amazonaws.com/Articles/optimised/Induction%20Electric%20Motor%20(Squirrel%20Cage).jpg", // remote
     shortDescription: "Most widely used industrial motor for pumps, fans, and conveyors.",
 
     function: "Converts electrical energy into mechanical rotational energy",

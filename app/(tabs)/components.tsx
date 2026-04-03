@@ -1,116 +1,136 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { View, Text, ScrollView, TextInput, StyleSheet, TouchableOpacity, Pressable, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '@/src/context/ThemeContext';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import ComponentCard from '@/src/components/ui/componentCard';
 import { Link, useRouter } from 'expo-router';
+import { categories } from '@/src/data/categories';
+import { componentsData } from '@/src/data/components';
 
-// Import images (you can replace with remote URLs later via Firebase Storage)
-const siemensPLC = require('@/assets/photos/breaker.png'); // add your images
-const inverter = require('@/assets/photos/generator.png');
-const contactor = require('@/assets/photos/generator.png');
-const motor = require('@/assets/photos/generator.png');
-const relay = require('@/assets/photos/generator.png');
-const generator = require('@/assets/photos/generator.png');
+const ScreenHeader = ({ searchQuery, setSearchQuery, theme, filteredComponents, categories, handleComponentPress }: any) => {
+  return (
+    <View>
+      {/* Search Bar */}
+      <View style={styles.searchContainer}>
+        <View style={[styles.searchSection, { borderColor: theme.text }]}>
+          <TextInput
+            style={[styles.input, { color: theme.text }]}
+            placeholder="Search components..."
+            placeholderTextColor={theme.gray_text}
+            value={searchQuery}
+            onChangeText={setSearchQuery} // Updates state without unmounting
+            autoCapitalize="none"
+          />
+          <View style={[styles.iconCircle, { backgroundColor: theme.text }]}>
+            <Ionicons name="search" size={24} color={theme.background} />
+          </View>
+        </View>
+      </View>
+
+      {/* Show Search Results */}
+      {searchQuery.trim() !== '' && (
+        <View style={styles.searchResultsContainer}>
+          <Text style={[styles.searchResultsTitle, { color: theme.blue_text }]}>
+            Search Results ({filteredComponents.length})
+          </Text>
+          
+          {filteredComponents.length > 0 ? (
+            filteredComponents.map((comp: any) => (
+              <TouchableOpacity
+                key={comp.id}
+                style={[styles.searchResultItem, { backgroundColor: theme.cards_background }]}
+                onPress={() => handleComponentPress(comp.id, comp.name, comp.category)}
+              >
+                <Text style={[styles.resultName, { color: theme.text }]}>{comp.name}</Text>
+                <Text style={[styles.resultCategory, { color: theme.gray_text }]}>{comp.category}</Text>
+              </TouchableOpacity>
+            ))
+          ) : (
+            <Text style={[styles.noResults, { color: theme.gray_text }]}>
+              No components found for "{searchQuery}"
+            </Text>
+          )}
+        </View>
+      )}
+
+      {/* Categories & Featured Title */}
+      <View style={styles.section}>
+        <Text style={[styles.sectionTitle, { color: theme.text }]}>Categories</Text>
+        <View style={styles.categoriesGrid}>
+          {categories.map((cat: any, index: number) => (
+            <TouchableOpacity 
+              key={index}
+              style={[styles.categoryCard, { backgroundColor: theme.cards_background, borderColor: theme.border }]}
+            >
+              <Link href={`/category/${cat.title}` as any} asChild>
+                <Pressable>
+                  <MaterialCommunityIcons name={cat.iconName} size={28} color="#E31E24" />
+                  <Text style={[styles.categoryTitle, { color: theme.text }]}>{cat.title}</Text>
+                </Pressable>
+              </Link>
+            </TouchableOpacity>
+          ))}
+        </View>
+        <Text style={[styles.sectionTitle, { color: theme.text, marginTop: 40 }]}>
+          Featured Components
+        </Text>
+      </View>
+    </View>
+  );
+};
+
 
 export default function components() {
   const { theme } = useTheme();
   const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const categories = [
-    {
-      title: "Electrical Machines",
-      desc: "Explore AC/DC motors, generators, and alternators",
-      icon: <MaterialCommunityIcons name="engine" size={28} color="#E31E24" />,
-    },
-    {
-      title: "Power Components",
-      desc: "Discover transformers, circuit breakers, switches, and other devices for power",
-      icon: <MaterialCommunityIcons name="flash" size={28} color="#E31E24" />,
-    },
-    {
-      title: "Control & Automation",
-      desc: "PLCs, VFDs, contactors, relays, and other automation systems",
-      icon: <MaterialCommunityIcons name="robot-industrial" size={28} color="#E31E24" />,
-    },
-    {
-      title: "Cables & Accessories",
-      desc: "Power cables, control cables, wiring accessories, connectors and etc",
-      icon: <MaterialCommunityIcons name="cable-data" size={28} color="#E31E24" />,
-    },
-    {
-      title: "Protection Devices",
-      desc: "MCBs, MCCBs, RCCBs, fuses, and relays that safeguard equipments",
-      icon: <MaterialCommunityIcons name="shield-check" size={28} color="#E31E24" />,
-    },
-    {
-      title: "Instrumentation",
-      desc: "Sensors, transducers, and measuring instruments",
-      icon: <MaterialCommunityIcons name="gauge" size={28} color="#E31E24" />,
-    },
-  ];
+  // Live search results
+  const filteredComponents = useMemo(() => {
+    if (!searchQuery.trim()) return [];
 
-  const featured = [
-      { id: '1', name: "Siemens PLC", category: "Control & Automation", image: siemensPLC },
-      { id: '2', name: "Inverter", category: "Power Component", image: inverter },
-      { id: '3', name: "Contactor", category: "Power Component", image: contactor },
-      { id: '4', name: "Motor", category: "Electrical Machine", image: motor },
-      { id: '5', name: "Relay", category: "Protection Device", image: relay },
-      { id: '6', name: "Generator", category: "Electrical Machine", image: generator },
-  ];
+    const query = searchQuery.toLowerCase().trim();
+
+    return componentsData.filter(comp =>
+      comp.name.toLowerCase().includes(query) ||
+      comp.category.toLowerCase().includes(query) ||
+      comp.shortDescription?.toLowerCase().includes(query)
+    );
+  }, [searchQuery]);
+
+  const handleComponentPress = (id: string, name: string, category: string) => {
+    router.push({
+      pathname: '/component/[id]',
+      params: { id, name, category }
+    });
+  };
+
+  const featuredComponents = componentsData.slice(0, 8).map((comp, index) => ({
+    id: comp.id,
+    name: comp.name,
+    category: comp.category,
+    image: require('@/assets/photos/generator.png') || comp.imageUrl, // fallback
+  }));
 
   return (
     <SafeAreaView  edges={['top']}  style={{ backgroundColor: theme.background, flex: 1 }} className='px-4'>
       <FlatList
-          data={featured}
+          data={featuredComponents}
           keyExtractor={(item) => item.id}
           showsVerticalScrollIndicator={false}
           numColumns={2}
           columnWrapperStyle={styles.row}
-          ListHeaderComponent={() => (
-            <View>
-              {/* Search Bar */}
-              <View style={styles.searchContainer}>
-                <View style={[styles.searchSection, { borderColor: theme.text }]}>
-                  <TextInput
-                    style={[styles.input, { color: theme.text }]}
-                    placeholder="Search componets..."
-                    placeholderTextColor={theme.gray_text}
-                  />
-                  <View style={[styles.iconCircle, { backgroundColor: theme.text }]}>
-                    <Ionicons name="search" size={24} color={theme.background} />
-                  </View>
-                </View>
-              </View>
-
-              {/* Categories Section */}
-              <View style={styles.section}>
-                <Text style={[styles.sectionTitle, { color: theme.text }]}>Categories</Text>
-                
-                <View style={styles.categoriesGrid}>
-                  {categories.map((cat, index) => (
-                    <TouchableOpacity 
-                      key={index}
-                      style={[styles.categoryCard, { backgroundColor: theme.cards_background || '#f8f8f8', borderColor: theme.border }]}
-                      activeOpacity={0.85}
-                    >
-                      <Link href={`/category/${cat.title}` as any} asChild>
-                        <Pressable>
-                          <View style={styles.categoryIcon}>{cat.icon}</View>
-                          <Text style={[styles.categoryTitle, { color: theme.text }]}>{cat.title}</Text>
-                        </Pressable>
-                      </Link>
-                    </TouchableOpacity>
-                  ))}
-                </View>
-
-                <Text style={[styles.sectionTitle, { color: theme.text, marginTop: 40 }]}>
-                  Featured Components
-                </Text>
-              </View>
-            </View>
-          )}
+          ListHeaderComponent={
+            <ScreenHeader 
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              theme={theme}
+              filteredComponents={filteredComponents}
+              categories={categories}
+              handleComponentPress={handleComponentPress}
+            />
+          }
           renderItem={({ item }) => 
               <ComponentCard
                   key={item.id}
@@ -131,6 +151,7 @@ export default function components() {
               />
           }
           contentContainerStyle={styles.listContent}
+          keyboardShouldPersistTaps="handled"
       />      
     </SafeAreaView>
   );
@@ -161,6 +182,36 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+
+  searchResultsContainer: {
+    paddingHorizontal: 16,
+    paddingBottom: 20,
+  },
+  searchResultsTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    marginBottom: 12,
+  },
+  searchResultItem: {
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#ddd',
+  },
+  resultName: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 4,
+  },
+  resultCategory: {
+    fontSize: 14,
+  },
+  noResults: {
+    textAlign: 'center',
+    paddingVertical: 20,
+    fontStyle: 'italic',
   },
 
   section: {
