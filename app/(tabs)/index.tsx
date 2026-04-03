@@ -1,10 +1,11 @@
 import { useTheme } from '@/src/context/ThemeContext';
-import { Dimensions, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native';
 import Topbar from '../../src/components/navigation/topbar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AppCarousel from '@/src/components/ui/appCarousel';
 import { FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Link } from 'expo-router';
 
 export default function HomeScreen() {
   const { theme } = useTheme();  
@@ -12,31 +13,37 @@ export default function HomeScreen() {
   const categories = [
     {
       title: "Components",
+      path: "components",
       desc: "Explore electrical parts, symbols, functions, and maintenance tips.",
       icon: <MaterialCommunityIcons name="cog" size={32} color="#E31E24" />,
     },
     {
       title: "Problem Solver",
+      path: "problemSolver",
       desc: "Diagnose faults with step-by-step troubleshooting and safety guides.",
       icon: <MaterialCommunityIcons name="wrench" size={32} color="#E31E24" />,
     },
     {
       title: "Where to Buy",
+      path: "suppliers",
       desc: "Locate trusted suppliers near you with pricing and contact details.",
       icon: <MaterialCommunityIcons name="cart" size={32} color="#E31E24" />,
     },
     {
       title: "Learn Electrical",
+      path: "problemSolver",
       desc: "Master electrical theory, wiring practices, and safety standards.",
       icon: <MaterialCommunityIcons name="book" size={32} color="#E31E24" />,
     },
     {
       title: "Technicians",
+      path: "technicians",
       desc: "Connect with certified professionals and available local services.",
       icon: <FontAwesome5 name="users" size={28} color="#E31E24" />,
     },
     {
       title: "About & Contact",
+      path: "about",
       desc: "App information, developer contact, feedback, and disclaimers.",
       icon: <Ionicons name="information-circle" size={34} color="#E31E24" />,
     },
@@ -62,21 +69,25 @@ export default function HomeScreen() {
                   style={[styles.card, { width: '47%',  backgroundColor: theme.background, borderColor: theme.light_gray, shadowColor: theme.text}]}
                   className="mx-1 rounded-2xl p-4 mb-4 items-center border"
                 >
-                  <View className="mb-3 h-10 justify-center">
-                    {item.icon}
-                  </View>
+                  <Link href={`/${item.path}` as any} asChild>
+                    <Pressable>
+                      <View className="mb-3 h-10 justify-center flex-row items-center">
+                        {item.icon}
+                      </View>
 
-                  <Text style={{color: theme.text}} className="text-[15px] font-bold text-center mb-1">
-                    {item.title}
-                  </Text>
+                      <Text style={{color: theme.text}} className="text-[15px] font-bold text-center mb-1">
+                        {item.title}
+                      </Text>
 
-                  <Text 
-                    style={{color: theme.gray_text}}
-                    className="text-[12px] text-gray-500 text-center leading-4"
-                    numberOfLines={4}
-                  >
-                    {item.desc}
-                  </Text>
+                      <Text 
+                        style={{color: theme.gray_text}}
+                        className="text-[12px] text-gray-500 text-center leading-4"
+                        numberOfLines={4}
+                      >
+                        {item.desc}
+                      </Text>
+                    </Pressable>
+                  </Link>
                 </TouchableOpacity>
               ))}
             </View>

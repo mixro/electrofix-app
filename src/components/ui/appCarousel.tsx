@@ -12,6 +12,8 @@ const data = [
     path: "components",
     description: "Identify and explore electrical devices across various categories.",
     image: require('@/assets/photos/generator.png'), 
+    buttonColor: "#FF4D4D",
+    fontColor: "#fff",
     colors: ["#1C2526", "#2c4d50", "#336f75"]
   },
   {
@@ -19,6 +21,8 @@ const data = [
     path: "suppliers",
     description: "Connect with verified electrical equipment suppliers in Tanzania.",
     image: require('@/assets/photos/package.png'), 
+    buttonColor: "#ffb004",
+    fontColor: "#000000",
     colors: ["#012727", "#006464"]
   },
   {
@@ -26,6 +30,8 @@ const data = [
     path: "technicians",
     description: "Hire certified engineers and technicians for your electrical projects.",
     image: require('@/assets/photos/technician.png'), 
+    buttonColor: "#ffcc40",
+    fontColor: "#000000",
     colors: ["#05291f", "#0f766e"]
   },
 ];
@@ -53,10 +59,10 @@ export default function AppCarousel() {
 
               <Text style={styles.description}>{item.description}</Text>
 
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={[styles.button, {backgroundColor: item.buttonColor}]}>
                 <Link href={`/${item.path}` as any} asChild>
                   <Pressable>
-                    <Text style={styles.buttonText}>View  →</Text>
+                    <Text style={[styles.buttonText, {color: item.fontColor}]}>View  →</Text>
                   </Pressable>
                 </Link>
               </TouchableOpacity>
@@ -106,7 +112,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   button: {
-    backgroundColor: '#FF4D4D',
     paddingVertical: 6,
     paddingHorizontal: 15,
     borderRadius: 5,
@@ -114,7 +119,6 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   buttonText: {
-    color: 'white',
     fontWeight: 'bold',
   },
   image: {
