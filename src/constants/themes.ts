@@ -19,7 +19,7 @@ export const themes = {
     menu_button: "#d8d8d8ff",
     green_accent: "#d5e6d5ff",
     tabBackground: '#FFFFFF',
-    tabActiveTint: '#2E7D32', 
+    tabActiveTint: '#d80000ff', 
     tabInactiveTint: '#666666',
     border: '#DDDDDD',
     event_card: '#fafafaff',

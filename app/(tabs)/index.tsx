@@ -49,7 +49,7 @@ export default function HomeScreen() {
 
           <AppCarousel />
 
-          <View className="flex-1 px-0 py-6">
+          <View className="flex-1 px-0 py-6 pb-4">
             <Text style={{color: theme.text}} className="text-center text-2xl font-bold tracking-widest text-black mb-8">
               ALL COVERED
             </Text>
@@ -59,7 +59,7 @@ export default function HomeScreen() {
                 <TouchableOpacity 
                   key={index} 
                   activeOpacity={0.7}
-                  style={[styles.card, { width: '47%',  backgroundColor: theme.background, borderColor: theme.toast_background, shadowColor: theme.text}]}
+                  style={[styles.card, { width: '47%',  backgroundColor: theme.background, borderColor: theme.light_gray, shadowColor: theme.text}]}
                   className="mx-1 rounded-2xl p-4 mb-4 items-center border"
                 >
                   <View className="mb-3 h-10 justify-center">

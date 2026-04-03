@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     display: "flex"
   },
   logo: {
-    fontWeight: '600',
+    fontWeight: '900',
     fontSize: 20,
   },
   container: {

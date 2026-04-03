@@ -1,5 +1,7 @@
+import { Link } from 'expo-router';
 import React from 'react';
-import { View, Text, Image, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
+import { LinearGradient } from "expo-linear-gradient";
+import { View, Text, Image, Dimensions, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 
 const width = Dimensions.get('window').width;
@@ -7,23 +9,25 @@ const width = Dimensions.get('window').width;
 const data = [
   {
     title: "Components",
-    description: "Explore various electrical components & Devices in different categories.",
-    image: require('@/assets/photos/generator.png'), // The Predator generator image
-    color: '#4A5568' 
+    path: "components",
+    description: "Identify and explore electrical devices across various categories.",
+    image: require('@/assets/photos/generator.png'), 
+    colors: ["#1C2526", "#2c4d50", "#336f75"]
   },
   {
     title: "Suppliers",
-    description: "Explore various electrical components & Devices in different categories.",
-    image: require('@/assets/photos/generator.png'), // The Predator generator image
-    color: '#02404b' 
+    path: "suppliers",
+    description: "Connect with verified electrical equipment suppliers in Tanzania.",
+    image: require('@/assets/photos/package.png'), 
+    colors: ["#012727", "#006464"]
   },
   {
     title: "Technicians",
-    description: "Explore various electrical components & Devices in different categories.",
-    image: require('@/assets/photos/generator.png'), // The Predator generator image
-    color: '#3e3f00' 
+    path: "technicians",
+    description: "Hire certified engineers and technicians for your electrical projects.",
+    image: require('@/assets/photos/technician.png'), 
+    colors: ["#05291f", "#0f766e"]
   },
-  // ... more items
 ];
 
 export default function AppCarousel() {
@@ -31,19 +35,30 @@ export default function AppCarousel() {
     <View style={styles.container}>
       <Carousel
         loop
-        width={width} // Slightly less than screen width for padding
+        width={width} 
         height={200}
         autoPlay={true}
         data={data}
         autoPlayInterval={5000}
         scrollAnimationDuration={1000}
         renderItem={({ item }) => (
-          <View style={[styles.card, { backgroundColor: item.color }]}>
+          <LinearGradient
+            colors={item.colors as [string, string, ...string[]]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.card}
+          >
             <View style={styles.textContainer}>
               <Text style={styles.title}>{item.title}</Text>
+
               <Text style={styles.description}>{item.description}</Text>
+
               <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>View  →</Text>
+                <Link href={`/${item.path}` as any} asChild>
+                  <Pressable>
+                    <Text style={styles.buttonText}>View  →</Text>
+                  </Pressable>
+                </Link>
               </TouchableOpacity>
             </View>
             
@@ -52,7 +67,7 @@ export default function AppCarousel() {
               style={styles.image} 
               resizeMode="contain" 
             />
-          </View>
+          </LinearGradient>
         )}
       />
     </View>
