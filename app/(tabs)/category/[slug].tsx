@@ -1,35 +1,38 @@
 import { View, Text, ScrollView, FlatList, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTheme } from '@/src/context/ThemeContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ComponentCard from '@/src/components/ui/componentCard';
+import { categories } from '@/src/data';
+import { componentsData } from '@/src/data/components';
 
 export default function category() {
     const { theme } = useTheme();
     const router = useRouter();
-    const { id } = useLocalSearchParams<{ id: string }>();
+    const { slug } = useLocalSearchParams<{ slug: string }>();
 
-    const siemensPLC = require('@/assets/photos/breaker.png'); // add your images
-    const inverter = require('@/assets/photos/generator.png');
-    const contactor = require('@/assets/photos/generator.png');
-    const motor = require('@/assets/photos/generator.png');
-    const relay = require('@/assets/photos/generator.png');
-    const generator = require('@/assets/photos/generator.png');
+    // Find the current category details
+    const currentCategory = categories.find(cat => cat.slug === slug);
 
-    const featured = [
-        { id: '1', name: "Siemens PLC", category: "Control & Automation", image: siemensPLC },
-        { id: '2', name: "Inverter", category: "Power Component", image: inverter },
-        { id: '3', name: "Contactor", category: "Power Component", image: contactor },
-        { id: '4', name: "Motor", category: "Electrical Machine", image: motor },
-        { id: '5', name: "Relay", category: "Protection Device", image: relay },
-        { id: '6', name: "Generator", category: "Electrical Machine", image: generator },
-    ];
+    // Filter components that belong to this category
+    const categoryComponents = useMemo(() => {
+      if (!slug) return [];
+      
+      return componentsData.filter(comp => 
+        comp.category.toLowerCase() === currentCategory?.title.toLowerCase() ||
+        comp.category.toLowerCase().includes(slug.toLowerCase().replace(/-/g, ' '))
+      );
+    }, [slug, currentCategory]);
+
+    // Fallback description if category not found
+    const categoryDescription = currentCategory?.description || 
+      "Explore various electrical components in this category.";
 
   return (
     <SafeAreaView edges={['top']}  style={{ backgroundColor: theme.background, flex: 1,}} className='px-4'>
         <FlatList
-            data={featured}
+            data={categoryComponents}
             keyExtractor={(item) => item.id}
             showsVerticalScrollIndicator={false}
             numColumns={2}
@@ -37,11 +40,11 @@ export default function category() {
             ListHeaderComponent={() => (
                 <View style={styles.headerContainer}>
                     <Text style={[styles.mainTitle, {color: theme.text}]} className='uppercase'>
-                        {id}
+                        {slug}
                     </Text>
 
                     <Text style={[styles.introText, {color: theme.text}]}>
-                        Include transformers, DC machines (DC motors and generators), synchronous machines (alternators and synchronous motors), induction machines (single-phase and three-phase motors), as well as special machines such as stepper motors, servo motors, universal motors, reluctance motors, and linear machines
+                        {categoryDescription}
                     </Text>
 
                     <Text style={styles.listHeader}>List of components</Text>
@@ -53,15 +56,15 @@ export default function category() {
                     id={item.id}
                     name={item.name}
                     category={item.category}
-                    image={item.image}
+                    image={item.imageUrl}
                     onPress={() => {
-                    router.push({
-                      pathname: '/problemSolver/[id]',
-                      params: { 
-                        id: item.id,
-                      }
-                    });
-                  }}
+                      router.push({
+                        pathname: '/component/[id]',
+                        params: { 
+                          id: item.id,
+                        }
+                      });
+                    }}
                 />
             }
             contentContainerStyle={styles.listContent}

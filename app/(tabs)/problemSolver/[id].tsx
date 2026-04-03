@@ -1,68 +1,59 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTheme } from '@/src/context/ThemeContext';
 import { Ionicons } from '@expo/vector-icons';
 import FaultCategoryAccordion from '@/src/components/ui/FaultCategoryAccordion';
+import { getComponentById, getFaultsByComponentId } from '@/src/data';
 
-const motorImage = require('@/assets/photos/generator.png'); // Replace with real image
 
 export default function ComponentFaultsScreen() {
   const { theme } = useTheme();
   const router = useRouter();
-  const { componentId, name, category } = useLocalSearchParams();
+  const { id, name, category } = useLocalSearchParams();
 
-  const componentName = typeof name === 'string' ? name : "3-Phase Squirrel Cage Induction Motor";
-  const componentCategory = typeof category === 'string' ? category : "Electrical Machine";
+  // Fetch real component data
+  const component = getComponentById(typeof id === 'string' ? id : '');
 
-  // Example fault data (expand this from your database later)
-  const faultCategories = [
-    {
-      title: "Starting & Running Problems",
-      faults: [
-        { id: "1", title: "Motor fails to start (no hum)", symptoms: "No sound or rotation when power is applied." },
-        { id: "2", title: "Motor hums but does not rotate", symptoms: "Humming sound present but rotor does not turn." },
-        { id: "3", title: "Motor starts slowly or takes too long to accelerate", symptoms: "Slow acceleration under load." },
-        { id: "4", title: "Motor runs in reverse direction", symptoms: "Rotation opposite to expected direction." },
-        { id: "5", title: "Motor loses speed under load", symptoms: "Speed drops significantly when loaded." },
-      ]
-    },
-    {
-      title: "Overheating & Thermal Issues",
-      faults: [
-        { id: "6", title: "Motor overheats excessively", symptoms: "High temperature during normal operation." },
-        // Add more...
-      ]
-    },
-    {
-      title: "Electrical & Winding Faults",
-      faults: [ /* ... */ ]
-    },
-    {
-      title: "Mechanical & Vibration Issues",
-      faults: [ /* ... */ ]
-    },
-    {
-      title: "Protection & Tripping Problems",
-      faults: [ /* ... */ ]
-    },
-    {
-      title: "Noise & Abnormal Operation",
-      faults: [ /* ... */ ]
-    },
-  ];
+  const componentName = component?.name || (typeof name === 'string' ? name : "Unknown Component");
+  const componentCategory = component?.category || (typeof category === 'string' ? category : "Electrical Component");
+
+  // Fetch faults related to this component
+  const componentFaults = useMemo(() => {
+    return getFaultsByComponentId(typeof id === 'string' ? id : '');
+  }, [id]);
+
+  // Group faults by category for accordion display
+  const faultCategories = useMemo(() => {
+    const grouped: Record<string, any[]> = {};
+
+    componentFaults.forEach(fault => {
+      const cat = fault.category || "Other Issues";
+      if (!grouped[cat]) grouped[cat] = [];
+      grouped[cat].push(fault);
+    });
+
+    return Object.entries(grouped).map(([title, faultsList]) => ({
+      title,
+      faults: faultsList
+    }));
+  }, [componentFaults]);
 
   const handleFaultPress = (fault: any) => {
     router.push({
-      pathname: '/problemSolver/solution/[id]',
+      pathname: '/problemSolver/solution/[faultId]',
       params: { 
-        id: fault.id,
+        faultId: fault.id,
         title: fault.title,
         componentName: componentName,
+        componentId: id,
       }
     });
   };
+
+  // Fallback image (you can improve this later)
+  const motorImage = require('@/assets/photos/generator.png');
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }} className='px-4'>
@@ -70,7 +61,7 @@ export default function ComponentFaultsScreen() {
         {/* Large Component Image */}
         <View style={[styles.imageContainer, {backgroundColor: theme.cards_background}]}>
           <Image 
-            source={motorImage} 
+            source={component?.imageUrl ? { uri: component.imageUrl } : motorImage}
             style={styles.image} 
             resizeMode="contain" 
           />
@@ -91,7 +82,7 @@ export default function ComponentFaultsScreen() {
           <View style={[styles.searchSection, { borderColor: theme.text }]}>
             <Ionicons name="search" size={20} color={theme.gray_text} style={{ marginRight: 10 }} />
             <Text style={[styles.searchInput, { color: theme.text }]}>
-              Search faults for this motor...
+              Search faults for this component...
             </Text>
           </View>
         </View>
@@ -100,14 +91,22 @@ export default function ComponentFaultsScreen() {
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: '#E31E24' }]}>Common Fault Categories</Text>
           
-          {faultCategories.map((cat, index) => (
-            <FaultCategoryAccordion
-              key={index}
-              title={cat.title}
-              faults={cat.faults}
-              onFaultPress={handleFaultPress}
-            />
-          ))}
+          {faultCategories.length > 0 ? (
+            faultCategories.map((cat, index) => (
+              <FaultCategoryAccordion
+                key={index}
+                title={cat.title}
+                faults={cat.faults}
+                onFaultPress={handleFaultPress}
+              />
+            ))
+          ) : (
+            <View style={styles.emptyState}>
+              <Text style={[styles.emptyText, { color: theme.gray_text }]}>
+                No faults available for this component yet.
+              </Text>
+            </View>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -160,5 +159,14 @@ searchSection: {
     fontSize: 20,
     fontWeight: '800',
     marginBottom: 16,
+  },
+
+   emptyState: {
+    padding: 40,
+    alignItems: 'center',
+  },
+  emptyText: {
+    fontSize: 16,
+    textAlign: 'center',
   },
 });

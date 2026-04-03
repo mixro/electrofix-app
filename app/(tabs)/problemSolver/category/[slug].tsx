@@ -4,41 +4,30 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTheme } from '@/src/context/ThemeContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ComponentCard from '@/src/components/ui/componentCard';
-import { categories } from '@/src/data';
+import { categories } from '@/src/data/categories';
 import { componentsData } from '@/src/data/components';
 
 export default function category() {
     const { theme } = useTheme();
     const router = useRouter();
-    const { id } = useLocalSearchParams<{ id: string }>();
+    const { slug } = useLocalSearchParams<{ slug: string }>();
 
     // Find the current category details
-    const currentCategory = categories.find(cat => cat.id === id);
+    const currentCategory = categories.find(cat => cat.slug === slug);
 
     // Filter components that belong to this category
     const categoryComponents = useMemo(() => {
-      if (!id) return [];
+      if (!slug) return [];
       
       return componentsData.filter(comp => 
         comp.category.toLowerCase() === currentCategory?.title.toLowerCase() ||
-        comp.category.toLowerCase().includes(id.toLowerCase().replace(/-/g, ' '))
+        comp.category.toLowerCase().includes(slug.toLowerCase().replace(/-/g, ' '))
       );
-    }, [id, currentCategory]);
+    }, [slug, currentCategory]);
 
     // Fallback description if category not found
     const categoryDescription = currentCategory?.description || 
       "Explore various electrical components in this category.";
-
-    const handleComponentPress = (id: string, name: string, category: string) => {
-      router.push({
-        pathname: '/component/[id]',
-        params: { 
-          id, 
-          name, 
-          category 
-        }
-      });
-    };
 
 
   return (
@@ -52,7 +41,7 @@ export default function category() {
             ListHeaderComponent={() => (
                 <View style={styles.headerContainer}>
                     <Text style={[styles.mainTitle, {color: theme.text}]} className='uppercase'>
-                        {id}
+                        {slug}
                     </Text>
 
                     <Text style={[styles.introText, {color: theme.text}]}>
@@ -70,13 +59,15 @@ export default function category() {
                     category={item.category}
                     image={item.imageUrl}
                     onPress={() => {
-                    router.push({
-                      pathname: '/component/[id]',
-                      params: { 
-                        id: item.id,
-                      }
-                    });
-                  }}
+                      router.push({
+                        pathname: '/problemSolver/[id]',
+                        params: { 
+                          id: item.id,
+                          name: item.name,
+                          category: item.category
+                        }
+                      });
+                    }}
                 />
             }
             contentContainerStyle={styles.listContent}

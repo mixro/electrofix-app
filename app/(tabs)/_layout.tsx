@@ -92,7 +92,7 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="category/[id]"
+          name="category/[slug]"
           options={{
             href: null,
             headerShown: false,
@@ -134,14 +134,14 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="problemSolver/category/[id]"
+          name="problemSolver/category/[slug]"
           options={{
             href: null,
             headerShown: false,
           }}
         />
         <Tabs.Screen
-          name="problemSolver/solution/[id]"
+          name="problemSolver/solution/[faultId]"
           options={{
             href: null,
             headerShown: false,

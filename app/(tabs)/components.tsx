@@ -63,7 +63,7 @@ const ScreenHeader = ({ searchQuery, setSearchQuery, theme, filteredComponents, 
               key={index}
               style={[styles.categoryCard, { backgroundColor: theme.cards_background, borderColor: theme.border }]}
             >
-              <Link href={`/category/${cat.title}` as any} asChild>
+              <Link href={`/category/${cat.id}` as any} asChild>
                 <Pressable>
                   <MaterialCommunityIcons name={cat.iconName} size={28} color="#E31E24" />
                   <Text style={[styles.categoryTitle, { color: theme.text }]}>{cat.title}</Text>
