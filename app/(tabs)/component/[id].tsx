@@ -2,6 +2,12 @@ import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { View, Text, Image, ScrollView, StyleSheet, StatusBar } from 'react-native';
 import { useTheme } from '@/src/context/ThemeContext';
+import { componentsData } from '@/src/data/components';
+import { useLocalSearchParams } from 'expo-router';
+
+const getComponentById = (id: string) => {
+  return componentsData.find(component => component.id === id);
+};
 
 const DetailSection = ({ title, children }: { title: string; children: React.ReactNode }) => {
   const { theme } = useTheme(); // Access theme here
@@ -25,6 +31,19 @@ const BulletItem = ({ text }: { text: string }) => {
 
 export default function ComponentDetailScreen() {
   const { theme } = useTheme();
+  const { id } = useLocalSearchParams<{ id: string }>();
+
+  // Fetch the component data dynamically
+  const component = getComponentById(id || '');
+
+  // Fallback if component not found
+  if (!component) {
+    return (
+      <SafeAreaView style={{ flex: 1, backgroundColor: theme.background, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{ color: theme.text, fontSize: 18 }}>Component not found</Text>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={{ backgroundColor: theme.background, flex: 1 }} className='px-4'>
@@ -33,7 +52,7 @@ export default function ComponentDetailScreen() {
         {/* Header Image Section */}
         <View style={[styles.imageHeader, {backgroundColor: theme.cards_background}]}>
           <Image 
-            source={require('@/assets/photos/generator.png')} 
+            source={{ uri: component.imageUrl }}
             style={styles.mainImage} 
             resizeMode="contain" 
           />
@@ -41,61 +60,61 @@ export default function ComponentDetailScreen() {
 
         <View style={styles.contentContainer}>
           {/* Component Identity */}
-          <Text style={[styles.componentName, {color: theme.text}]}>3-Phase Squirrel Cage Induction Motor</Text>
-          <Text style={[styles.componentCategory, {color: theme.gray_text}]}>Electrical Machine</Text>
+          <Text style={[styles.componentName, {color: theme.text}]}>{component.name}</Text>
+          <Text style={[styles.componentCategory, {color: theme.gray_text}]}>{component.category}</Text>
 
           {/* Function */}
           <DetailSection title="Function">
             <Text style={[styles.bodyText, {color: theme.text}]}>
-              Converts electrical energy into mechanical rotational energy to drive pumps, fans, 
-              compressors, conveyors, machine tools, and other industrial equipment.
+              {component.function}
             </Text>
           </DetailSection>
 
           {/* Working Principle */}
           <DetailSection title="Working principle">
             <Text style={[styles.bodyText, {color: theme.text}]}>
-              A 3-phase AC supply is given to the stator windings, which produces a rotating magnetic 
-              field at synchronous speed. This rotating field cuts the rotor bars, inducing current 
-              in the rotor by electromagnetic induction. The induced rotor current creates its own 
-              magnetic field, causing the rotor to rotate in the same direction as the magnetic field.
+              {component.workingPrinciple}
             </Text>
           </DetailSection>
 
           {/* Ratings Table-like section */}
           <DetailSection title="Ratings (Typical Specifications)">
             <View style={styles.specsContainer}>
-              <Text style={styles.specLine}><Text style={styles.bold}>Power Rating:</Text> 0.75 kW – 500 kW</Text>
-              <Text style={styles.specLine}><Text style={styles.bold}>Voltage:</Text> 230/400V or 400/690V (3-phase)</Text>
-              <Text style={styles.specLine}><Text style={styles.bold}>Speed:</Text> 750, 1000, 1500, or 3000 RPM</Text>
-              <Text style={styles.specLine}><Text style={styles.bold}>Enclosure:</Text> IP55 or IP65 (TEFC)</Text>
-              <Text style={styles.specLine}><Text style={styles.bold}>Efficiency:</Text> IE2 or IE3 (Premium Efficiency)</Text>
+              {Object.entries(component.ratings).map(([key, value]) => (
+                <Text key={key} style={styles.specLine}>
+                  <Text style={styles.bold}>{key.charAt(0).toUpperCase() + key.slice(1)}:</Text> {value}
+                </Text>
+              ))}
             </View>
           </DetailSection>
 
           {/* Applications */}
           <DetailSection title="Applications">
-            <BulletItem text="Industrial pumps and compressors" />
-            <BulletItem text="HVAC fans and blowers" />
-            <BulletItem text="Conveyor belts and material handling" />
-            <BulletItem text="Machine tools and lathes" />
+            {component.applications.map((app, index) => (
+              <BulletItem key={index} text={app} />
+            ))}
           </DetailSection>
 
           {/* Faults */}
           <DetailSection title="Faults">
-            <BulletItem text="Overheating (due to overload or blocked ventilation)" />
-            <BulletItem text="Bearing failure (noise, vibration, seizure)" />
-            <BulletItem text="Stator winding short circuit or burnout" />
+            {component.advantages.map((adv, index) => (
+              <BulletItem key={index} text={adv} />
+            ))}
           </DetailSection>
 
           {/* Maintenance Tips */}
           <DetailSection title="Maintenance Tips">
-            <BulletItem text="Check and clean cooling fins regularly" />
-            <BulletItem text="Lubricate bearings at recommended intervals" />
-            <BulletItem text="Measure vibration and temperature during operation" />
-            <BulletItem text="Keep the motor clean and dry" />
-          </DetailSection>
-          
+            {component.limitations.map((lim, index) => (
+              <BulletItem key={index} text={lim} />
+            ))}
+          </DetailSection>   
+
+          {/* Safety Precautions */}
+          <DetailSection title="Safety Precautions">
+            {component.safetyPrecautions.map((precaution, index) => (
+              <BulletItem key={index} text={precaution} />
+            ))}
+          </DetailSection>       
         </View>
       </ScrollView>
     </SafeAreaView>
