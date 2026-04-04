@@ -11,6 +11,8 @@ export const technicians: Technician[] = [
     specialties: ["Motor Repair", "PLC Programming", "Industrial Wiring", "VFD Installation"],
     availability: "Available Monday - Saturday",
     rating: 4.9,
+    projects: 190,
+    bio: "A seasoned expert in industrial automation and heavy machinery maintenance. Joseph has led numerous large-scale factory wiring projects across Dar es Salaam, specializing in precision PLC programming and high-efficiency motor diagnostics.",
   },
   {
     id: "tech-002",
@@ -22,6 +24,8 @@ export const technicians: Technician[] = [
     specialties: ["PLC", "SCADA", "VFD", "Instrumentation"],
     availability: "Available on call",
     rating: 4.7,
+    projects: 170,
+    bio: "Specializing in smart control systems, Amani bridges the gap between traditional electrical work and modern automation. He is highly sought after for SCADA implementation and troubleshooting complex instrumentation loops in industrial environments.",
   },
   {
     id: "tech-003",
@@ -33,6 +37,8 @@ export const technicians: Technician[] = [
     specialties: ["Generator Repair", "Wiring", "Solar Systems"],
     availability: "Weekdays only",
     rating: 4.5,
+    projects: 80,
+    bio: "A dedicated technician with a strong focus on renewable energy and backup power. Fatuma is Arusha’s leading expert in solar array integration and comprehensive generator overhauls for both commercial and residential clients.",
   },
   {
     id: "tech-004",
@@ -44,6 +50,8 @@ export const technicians: Technician[] = [
     specialties: ["Domestic & Industrial Wiring", "Fault Diagnosis", "Panel Building"],
     availability: "24/7 Emergency Service",
     rating: 4.8,
+    projects: 150,
+    bio: "With over 15 years of field experience, David is a master of electrical fault diagnosis and custom control panel assembly. He is well-known for his reliability in emergency repairs and his meticulous approach to safety standards.",
   },
   {
     id: "tech-005",
@@ -55,5 +63,7 @@ export const technicians: Technician[] = [
     specialties: ["AC/DC Motor Rewinding", "Bearing Replacement"],
     availability: "Monday - Friday",
     rating: 4.4,
+    projects: 100,
+    bio: "Mwanza’s premier specialist in the restoration of AC and DC motors. Juma combines decade-old craftsmanship with modern testing equipment to ensure every motor rewinding job meets original manufacturer specifications.",
   },
 ];

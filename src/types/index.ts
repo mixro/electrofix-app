@@ -66,6 +66,8 @@ export type Technician = {
   specialties: string[];           // ["Motors", "PLC", "Wiring"]
   availability: string;
   rating?: number;
+  bio?: string;
+  projects: number;
 };
 
 export type Category = {

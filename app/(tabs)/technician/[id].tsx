@@ -3,12 +3,15 @@ import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, Linking } 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 import { useTheme } from '@/src/context/ThemeContext';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { technicians } from '@/src/data';
 
 export default function TechnicianDetailScreen() {
   const { theme } = useTheme();
+  const { id } = useLocalSearchParams<{ id: string }>();
 
-  // Professional color for verification badges
-  const verifiedColor = theme.green_text || '#2E7D32';
+  const technician = technicians.find(s => s.id === id);
+
 
   return (
     <SafeAreaView edges={['top']} style={{ backgroundColor: theme.background, flex: 1 }}>
@@ -25,18 +28,20 @@ export default function TechnicianDetailScreen() {
             
           <View style={styles.nameSection}>
             <View style={styles.row}>
-              <Text style={[styles.name, { color: theme.text }]}>Eng. Baraka Mlowe</Text>
-              <Ionicons name="checkmark-circle" size={20} color={verifiedColor} />
+              <Text style={[styles.name, { color: theme.text }]}>{technician?.name}</Text>
+              <Ionicons name="checkmark-circle" size={20} color={theme.green_text} />
             </View>
-            <Text style={[styles.role, { color: theme.blue_text }]}>Electrical Engineer</Text>
+            <Text style={[styles.role, { color: theme.blue_text }]}>{technician?.profession}</Text>
           </View>
           
           <View style={styles.statsRow}>
-            <StatItem label="Experience" value="8 Yrs" />
+            <StatItem label="Experience" value={`${technician?.experienceYears}yrs`} />
             <View style={[styles.statDivider, { backgroundColor: theme.border }]} />
-            <StatItem label="Projects" value="120+" />
+
+            <StatItem label="Projects" value={`${technician?.projects}+`} />
             <View style={[styles.statDivider, { backgroundColor: theme.border }]} />
-            <StatItem label="Rating" value="4.9/5" />
+
+            <StatItem label="Rating" value={`${technician?.rating}/5`}/>
           </View>
         </View>
 
@@ -63,9 +68,7 @@ export default function TechnicianDetailScreen() {
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: theme.text }]}>Professional Summary</Text>
           <Text style={[styles.bioText, { color: theme.gray_text }]}>
-            Specialized in high-voltage industrial installations and grid maintenance. 
-            Registered with the Engineers Registration Board (ERB) Tanzania. Expert in 
-            diagnosing complex machinery faults and energy efficiency audits.
+            {technician?.bio}
           </Text>
         </View>
 
@@ -73,7 +76,7 @@ export default function TechnicianDetailScreen() {
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: theme.text }]}>Core Specialties</Text>
           <View style={styles.tagContainer}>
-            {['Power Systems', 'PLC Programming', 'HVAC Control', 'Industrial Safety', 'Solar PV'].map((skill) => (
+            {technician?.specialties.map((skill) => (
               <View key={skill} style={[styles.tag, { backgroundColor: theme.cards_background || '#eee' }]}>
                 <Text style={[styles.tagText, { color: theme.text }]}>{skill}</Text>
               </View>
@@ -90,13 +93,21 @@ export default function TechnicianDetailScreen() {
           </View>
         </View>
 
+        <View style={[styles.locationCard, { backgroundColor: theme.secondary_background }]}>
+          <Ionicons name="time" size={24} color={theme.red_button} />
+          <View style={{ marginLeft: 12 }}>
+            <Text style={[styles.locationTitle, { color: theme.text }]}>Availability</Text>
+            <Text style={[styles.locationSub, { color: theme.gray_text }]}>{technician?.availability}</Text>
+          </View>
+        </View>
+
       </ScrollView>
     </SafeAreaView>
   );
 }
 
 // Sub-components
-const StatItem = ({ label, value }: { label: string, value: string }) => {
+const StatItem = ({ label, value }: { label: string, value: any }) => {
   const { theme } = useTheme();
   return (
     <View style={styles.statItem}>
@@ -107,7 +118,7 @@ const StatItem = ({ label, value }: { label: string, value: string }) => {
 };
 
 const styles = StyleSheet.create({
-  scrollContainer: { paddingBottom: 40 },
+  scrollContainer: { paddingBottom: 20 },
   profileCard: {
     margin: 16,
     borderRadius: 24,
@@ -178,6 +189,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 15
   },
   locationTitle: { fontSize: 16, fontWeight: '700' },
   locationSub: { fontSize: 13, marginTop: 2 },
