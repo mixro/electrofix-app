@@ -1,14 +1,29 @@
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import { useTheme } from '@/src/context/ThemeContext';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
 import { useDrawerStatus } from '@react-navigation/drawer';
+import { useRouter } from 'expo-router';
 
 export default function Topbar() {
     const { theme } = useTheme();
+    const router = useRouter();
     const navigation = useNavigation();
     const isDrawerOpen = useDrawerStatus() === 'open';
+
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleSearchSubmit = () => {
+      if (searchQuery.trim().length > 0) {
+        // Navigate to Components screen with search query as parameter
+        router.push({
+          pathname: '/components',
+          params: { search: searchQuery.trim() }
+        });
+        setSearchQuery(''); // Clear the search after navigating
+      }
+    };
 
   return (
     <View>
@@ -33,10 +48,18 @@ export default function Topbar() {
             style={[styles.input, {color: theme.text}]}
             placeholder="Search components..."
             placeholderTextColor={theme.gray_text}
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            onSubmitEditing={handleSearchSubmit}        // Pressing "Search" on keyboard
+            returnKeyType="search"
+            autoCapitalize="none"
           />
-          <View style={[styles.iconCircle, {backgroundColor: theme.text}]}>
+          <TouchableOpacity 
+            onPress={handleSearchSubmit}
+            style={[styles.iconCircle, {backgroundColor: theme.text}]}
+          >
             <Ionicons name="search" size={24} color={theme.background} />
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     </View>

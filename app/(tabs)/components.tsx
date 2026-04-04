@@ -1,10 +1,10 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View, Text, ScrollView, TextInput, StyleSheet, TouchableOpacity, Pressable, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '@/src/context/ThemeContext';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import ComponentCard from '@/src/components/ui/componentCard';
-import { Link, useRouter } from 'expo-router';
+import { Link, useLocalSearchParams, useRouter } from 'expo-router';
 import { categories } from '@/src/data/categories';
 import { componentsData } from '@/src/data/components';
 
@@ -84,7 +84,16 @@ const ScreenHeader = ({ searchQuery, setSearchQuery, theme, filteredComponents, 
 export default function components() {
   const { theme } = useTheme();
   const router = useRouter();
+  const { search } = useLocalSearchParams();
   const [searchQuery, setSearchQuery] = useState('');
+
+  console.log("search:", search)
+  console.log("searchQuery:", searchQuery)
+
+  useEffect(() => {
+    const newQuery = typeof search === 'string' ? search.trim() : '';
+    setSearchQuery(newQuery);
+  }, [search]);
 
   // Live search results
   const filteredComponents = useMemo(() => {
