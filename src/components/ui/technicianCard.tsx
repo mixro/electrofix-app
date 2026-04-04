@@ -1,139 +1,150 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Pressable } from 'react-native';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { View, Text, TouchableOpacity, StyleSheet, Pressable } from 'react-native';
 import { useTheme } from '@/src/context/ThemeContext';
+import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 
-interface TechProps {
-  name: string;
-  role: 'Engineer' | 'Technician';
-  location: string;
-  specialty: string;
-  experience: string;
-  avatar: any;
-}
+type TechnicianCardProps = {
+  technician: {
+    id: string;
+    name: string;
+    profession: string;
+    location: string;
+    phone: string;
+    experienceYears: number;
+    specialties: string[];
+    availability: string;
+    rating?: number;
+  };
+};
 
-export default function TechnicianCard({ name, role, location, specialty, experience, avatar }: TechProps) {
+export default function TechnicianCard({ technician }: TechnicianCardProps) {
   const { theme } = useTheme();
 
   return (
     <TouchableOpacity 
-      activeOpacity={0.9}
-      style={[styles.card, { backgroundColor: theme.secondary_background, borderColor: theme.light_gray }]}
+      style={[styles.card, { 
+        backgroundColor: theme.light_bg || '#f8f8f8', 
+        borderColor: theme.light_gray
+      }]}
+      activeOpacity={0.85}
     >
-        <Link href={`/technician/${name}` as any} asChild>
-            <Pressable>
-                <View style={styles.mainRow}>
-                    <Image source={avatar} style={styles.avatar} />
-                    
-                    <View style={styles.infoContainer}>
-                        <View style={styles.titleRow}>
-                            <Text style={[styles.name, { color: theme.text }]} numberOfLines={1}>{name}</Text>
-                        </View>
+      <Link href={`/technician/${technician.id}` as any} asChild>
+        <Pressable>
+          <View style={styles.header}>
+            <View style={[styles.avatar, {backgroundColor: theme.background}]}>
+              <MaterialCommunityIcons name="account-hard-hat" size={40} color="#E31E24" />
+            </View>
+            
+            <View style={styles.info}>
+              <Text style={[styles.name, { color: theme.text }]} numberOfLines={1}>
+                {technician.name}
+              </Text>
+              <Text style={[styles.profession, { color: theme.blue_text }]}>
+                {technician.profession}
+              </Text>
+              <View className='flex-row gap-2 items-center'>
+                <Ionicons name="location" size={13} color={theme.blue_text} />
+                <Text style={{ color: theme.gray_text, fontSize: 13 }}>{technician.location}</Text>
+              </View>
+            </View>
+          </View>
+        </Pressable>
+      </Link>
 
-                        <View style={styles.metaRow}>
-                            <MaterialCommunityIcons name="briefcase-outline" size={14} color={theme.gray_text} />
-                            <Text style={[styles.metaText, { color: theme.gray_text }]}>{specialty}</Text>
-                        </View>
+      <View style={styles.specialties}>
+        <Text style={[styles.specialtiesLabel, { color: theme.gray_text }]}>Specialties:</Text>
+        <Text style={[styles.specialtiesText, { color: theme.text }]}>
+          {technician.specialties.slice(0, 3).join(', ')}
+          {technician.specialties.length > 3 && '...'}
+        </Text>
+      </View>
 
-                        <View style={styles.metaRow}>
-                            <Ionicons name="location-outline" size={14} color={theme.blue_text} />
-                            <Text style={[styles.location, { color: theme.blue_text }]}>{location}</Text>
-                        </View>
-                    </View>
-                </View>
-
-                <View style={[styles.footer, { borderTopColor: theme.border }]}>
-                    <Text style={[styles.expText, { color: theme.gray_text }]}>
-                        <Text style={{ fontWeight: '800', color: theme.text }}>{experience}</Text> Experience
-                    </Text>
-
-                    <View style={[styles.roleBadge, { backgroundColor: role === 'Engineer' ? theme.blue_text : theme.green_button }]}>
-                        <Text style={styles.roleText}>{role}</Text>
-                    </View>
-                </View>
-            </Pressable>
-        </Link>
+      <View style={[styles.footer, {borderTopColor: '#ffffff',}]}>
+        <Text style={[styles.phone, { color: theme.text }]}>
+          📞 {technician.phone}
+        </Text>
+      </View>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: 20,
-    padding: 15,
-    marginBottom: 16,
+    marginHorizontal: 2,
+    marginVertical: 8,
+    borderRadius: 16,
     borderWidth: 1,
+    padding: 16,
+    elevation: 3,
   },
-  mainRow: {
+  header: {
     flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 15,
+    marginBottom: 12,
   },
   avatar: {
-    width: 65,
-    height: 65,
-    borderRadius: 32.5,
-    marginRight: 15,
-  },
-  infoContainer: {
-    flex: 1,
-  },
-  titleRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    width: 60,
+    height: 60,
+    borderRadius: 12,
+    justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 4,
+    marginRight: 14,
+  },
+  info: {
+    flex: 1,
+    justifyContent: 'center',
   },
   name: {
     fontSize: 17,
-    fontWeight: '800',
-    flex: 1,
+    fontWeight: '700',
+    marginBottom: 2,
   },
-  roleBadge: {
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: 6,
-    marginLeft: 8,
-  },
-  roleText: {
-    color: '#FFF',
-    fontSize: 10,
-    fontWeight: '900',
-    textTransform: 'uppercase',
-  },
-  metaRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 2,
-  },
-  metaText: {
-    fontSize: 13,
-    marginLeft: 5,
-  },
-  location: {
-    fontSize: 13,
+  profession: {
+    fontSize: 14,
     fontWeight: '600',
-    marginLeft: 5,
+    marginBottom: 4,
+  },
+  experience: {
+    marginBottom: 10,
+  },
+  experienceText: {
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  specialties: {
+    marginBottom: 12,
+  },
+  specialtiesLabel: {
+    fontSize: 13,
+    marginBottom: 4,
+  },
+  specialtiesText: {
+    fontSize: 14.5,
   },
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: 12,
     borderTopWidth: 1,
+    paddingTop: 12,
   },
-  expText: {
-    fontSize: 12,
+  phone: {
+    fontSize: 15,
+    fontWeight: '600',
   },
-  contactBtn: {
-    paddingHorizontal: 15,
-    paddingVertical: 7,
-    borderRadius: 8,
+  availability: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
   },
-  contactBtnText: {
-    color: '#FFF',
-    fontSize: 12,
-    fontWeight: '700',
+  availabilityText: {
+    fontSize: 13,
+  },
+  rating: {
+    position: 'absolute',
+    top: 16,
+    right: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
