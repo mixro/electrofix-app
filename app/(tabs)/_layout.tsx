@@ -92,56 +92,7 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="category/[slug]"
-          options={{
-            href: null,
-            headerShown: false,
-          }}
-        />
-        <Tabs.Screen
-          name="technician/[id]"
-          options={{
-            href: null,
-            headerShown: false,
-          }}
-        />
-        <Tabs.Screen
-          name="component/[id]"
-          options={{
-            href: null,
-            headerShown: false,
-          }}
-        />
-        <Tabs.Screen
-          name="supplier/[id]"
-          options={{
-            href: null,
-            headerShown: false,
-          }}
-        />
-        <Tabs.Screen
           name="about"
-          options={{
-            href: null,
-            headerShown: false,
-          }}
-        />
-        <Tabs.Screen
-          name="problemSolver/[id]"
-          options={{
-            href: null,
-            headerShown: false,
-          }}
-        />
-        <Tabs.Screen
-          name="problemSolver/category/[slug]"
-          options={{
-            href: null,
-            headerShown: false,
-          }}
-        />
-        <Tabs.Screen
-          name="problemSolver/solution/[faultId]"
           options={{
             href: null,
             headerShown: false,

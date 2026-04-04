@@ -40,7 +40,7 @@ export default function category() {
             ListHeaderComponent={() => (
                 <View style={styles.headerContainer}>
                     <Text style={[styles.mainTitle, {color: theme.text}]} className='uppercase'>
-                        {slug}
+                        {currentCategory?.title}
                     </Text>
 
                     <Text style={[styles.introText, {color: theme.text}]}>

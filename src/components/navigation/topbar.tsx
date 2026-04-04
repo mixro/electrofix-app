@@ -56,7 +56,7 @@ export default function Topbar() {
           />
           <TouchableOpacity 
             onPress={handleSearchSubmit}
-            style={[styles.iconCircle, {backgroundColor: theme.text}]}
+            style={[styles.iconCircle, {backgroundColor: theme.icons}]}
           >
             <Ionicons name="search" size={24} color={theme.background} />
           </TouchableOpacity>

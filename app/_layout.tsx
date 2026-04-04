@@ -7,6 +7,7 @@ import { ThemeProvider, useTheme } from '@/src/context/ThemeContext';
 import { themes } from '@/src/constants/themes';
 import { Drawer } from 'expo-router/drawer';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
+import { Stack } from 'expo-router';
 
 
 export default function RootLayout() {
@@ -25,7 +26,20 @@ export default function RootLayout() {
           drawerActiveTintColor: theme.tabActiveTint,
           drawerInactiveTintColor: theme.tabInactiveTint,
         }}
-      />
+      >
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(tabs)" />
+
+          <Stack.Screen name="component/[id]" />
+          <Stack.Screen name="technician/[id]" />
+          <Stack.Screen name="supplier/[id]" />
+          <Stack.Screen name="category/[slug]" />
+          <Stack.Screen name="problemSolver/[id]" />
+          
+          <Stack.Screen name="problemSolver/category/[slug]" />
+          <Stack.Screen name="problemSolver/solution/[faultId]" />
+        </Stack>
+      </Drawer>
 
     </ThemeProvider>
   );

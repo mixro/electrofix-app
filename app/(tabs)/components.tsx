@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '@/src/context/ThemeContext';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import ComponentCard from '@/src/components/ui/componentCard';
-import { Link, useLocalSearchParams, useRouter } from 'expo-router';
+import { Link, useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
 import { categories } from '@/src/data/categories';
 import { componentsData } from '@/src/data/components';
 
@@ -22,7 +22,7 @@ const ScreenHeader = ({ searchQuery, setSearchQuery, theme, filteredComponents, 
             onChangeText={setSearchQuery} // Updates state without unmounting
             autoCapitalize="none"
           />
-          <View style={[styles.iconCircle, { backgroundColor: theme.text }]}>
+          <View style={[styles.iconCircle, { backgroundColor: theme.icons }]}>
             <Ionicons name="search" size={24} color={theme.background} />
           </View>
         </View>
@@ -87,13 +87,18 @@ export default function components() {
   const { search } = useLocalSearchParams();
   const [searchQuery, setSearchQuery] = useState('');
 
-  console.log("search:", search)
-  console.log("searchQuery:", searchQuery)
-
   useEffect(() => {
     const newQuery = typeof search === 'string' ? search.trim() : '';
     setSearchQuery(newQuery);
   }, [search]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        setSearchQuery('');
+      };
+    }, [])
+  );
 
   // Live search results
   const filteredComponents = useMemo(() => {
