@@ -3,15 +3,10 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Pressable } from 'reac
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@/src/context/ThemeContext';
 import { Link } from 'expo-router';
+import { Supplier } from '@/src/types';
 
-interface SupplierProps {
-  name: string;
-  location: string;
-  description: string;
-  avatar: any;
-}
 
-export default function SupplierCard({ name, location, description, avatar }: SupplierProps) {
+export default function SupplierCard({ name, location, country, description, imageUrl }: Supplier) {
   const { theme } = useTheme();
 
   return (
@@ -26,17 +21,21 @@ export default function SupplierCard({ name, location, description, avatar }: Su
         <Link href={`/supplier/${name}` as any} asChild>
             <Pressable>
                 <View style={styles.topRow}>
-                    <Image source={avatar} style={styles.avatar} />
+                    <Image 
+                      source={require('@/assets/photos/1.png')} 
+                      style={styles.avatar} 
+                    />
+
                     <View style={styles.headerText}>
-                    <Text style={[styles.name, { color: theme.text }]} numberOfLines={1}>
-                        {name}
-                    </Text>
-                    <View style={[styles.locationBadge, { backgroundColor: theme.background }]}>
-                        <Ionicons name="location" size={12} color={theme.blue_text} />
-                        <Text style={[styles.locationText, { color: theme.blue_text }]}>
-                        {location}
-                        </Text>
-                    </View>
+                      <Text style={[styles.name, { color: theme.text }]} numberOfLines={1}>
+                          {name}
+                      </Text>
+                      <View style={[styles.locationBadge, { backgroundColor: theme.background }]}>
+                          <Ionicons name="location" size={12} color={theme.blue_text} />
+                          <Text style={[styles.locationText, { color: theme.blue_text }]}>
+                            {location}, {country}
+                          </Text>
+                      </View>
                     </View>
                 </View>
             </Pressable>
@@ -46,10 +45,14 @@ export default function SupplierCard({ name, location, description, avatar }: Su
         {description}
       </Text>
       
-      <View style={styles.footer}>
-        <Text style={[styles.viewProfile, { color: theme.red_button }]}>View Products</Text>
-        <Ionicons name="arrow-forward" size={16} color={theme.red_button} />
-      </View>
+      <Link href={`/supplier/${name}` as any} asChild>
+        <Pressable>
+          <View style={styles.footer}>
+            <Text style={[styles.viewProfile, { color: theme.red_button }]}>View Products</Text>
+            <Ionicons name="arrow-forward" size={16} color={theme.red_button} />
+          </View>
+        </Pressable>
+      </Link>
     </TouchableOpacity>
   );
 }

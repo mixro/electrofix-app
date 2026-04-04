@@ -44,7 +44,7 @@ export type Supplier = {
   id: string;
   name: string;
   country: string;
-  city: string;
+  location: string;
   address?: string;
   phone: string;
   email?: string;
@@ -52,6 +52,8 @@ export type Supplier = {
   products: string[];              // Array of component names or IDs
   priceRange?: string;
   rating?: number;
+  description: string;
+  imageUrl: string;
 };
 
 export type Technician = {
