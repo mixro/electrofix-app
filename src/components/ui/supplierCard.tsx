@@ -6,7 +6,7 @@ import { Link } from 'expo-router';
 import { Supplier } from '@/src/types';
 
 
-export default function SupplierCard({ name, location, country, description, imageUrl }: Supplier) {
+export default function SupplierCard({ id, name, location, country, description, phone }: Supplier) {
   const { theme } = useTheme();
 
   return (
@@ -18,7 +18,7 @@ export default function SupplierCard({ name, location, country, description, ima
         }
       ]}
     >
-        <Link href={`/supplier/${name}` as any} asChild>
+        <Link href={`/supplier/${id}` as any} asChild>
             <Pressable>
                 <View style={styles.topRow}>
                     <Image 
@@ -38,21 +38,17 @@ export default function SupplierCard({ name, location, country, description, ima
                       </View>
                     </View>
                 </View>
+
+                <Text style={[styles.description, { color: theme.gray_text }]} numberOfLines={2}>
+                  {description}
+                </Text>
             </Pressable>
         </Link>
-
-      <Text style={[styles.description, { color: theme.gray_text }]} numberOfLines={2}>
-        {description}
-      </Text>
       
-      <Link href={`/supplier/${name}` as any} asChild>
-        <Pressable>
-          <View style={styles.footer}>
-            <Text style={[styles.viewProfile, { color: theme.red_button }]}>View Products</Text>
-            <Ionicons name="arrow-forward" size={16} color={theme.red_button} />
-          </View>
-        </Pressable>
-      </Link>
+      <View style={styles.footer}>
+        <Ionicons name="call" size={18} color={theme.red_button} />
+        <Text style={[styles.viewProfile, { color: theme.red_button }]}>{phone}</Text>
+      </View>
     </TouchableOpacity>
   );
 }
@@ -108,6 +104,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: 'rgba(0,0,0,0.05)',
     paddingTop: 10,
+    gap: 5
   },
   viewProfile: {
     fontSize: 14,

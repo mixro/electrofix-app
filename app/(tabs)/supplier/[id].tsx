@@ -4,27 +4,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import { useTheme } from '@/src/context/ThemeContext';
 import ComponentCard from '@/src/components/ui/componentCard';
-import { useLocalSearchParams } from 'expo-router';
-
-// Import images (you can replace with remote URLs later via Firebase Storage)
-const siemensPLC = require('@/assets/photos/breaker.png'); // add your images
-const inverter = require('@/assets/photos/generator.png');
-const contactor = require('@/assets/photos/generator.png');
-const motor = require('@/assets/photos/generator.png');
-const relay = require('@/assets/photos/generator.png');
-const generator = require('@/assets/photos/generator.png');
-
-const SUPPLIER_PRODUCTS = [
-    { id: '1', name: "Siemens PLC", category: "Control & Automation", image: siemensPLC },
-    { id: '2', name: "Inverter", category: "Power Component", image: inverter },
-    { id: '3', name: "Contactor", category: "Power Component", image: contactor },
-    { id: '4', name: "Motor", category: "Electrical Machine", image: motor },
-    { id: '5', name: "Relay", category: "Protection Device", image: relay },
-    { id: '6', name: "Generator", category: "Electrical Machine", image: generator },
-];
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { suppliers } from '@/src/data/suppliers';
+import { componentsData } from '@/src/data';
 
 // Helper Components
-const DetailRow = ({ label, value }: { label: string; value: string }) => {
+const DetailRow = ({ label, value }: { label: string; value: any }) => {
   const { theme } = useTheme();
   return (
     <View style={styles.detailRow}>
@@ -42,7 +27,26 @@ const SocialIcon = ({ name, color }: { name: string; color: string }) => (
 
 export default function SupplierDetailScreen() {
     const { theme } = useTheme();
+    const router = useRouter();
     const { id } = useLocalSearchParams<{ id: string }>();
+
+    const supplier = suppliers.find(s => s.id === id);
+    
+    if (!supplier) {
+      return (
+        <SafeAreaView style={{ flex: 1, backgroundColor: theme.background, justifyContent: 'center', alignItems: 'center' }}>
+          <Text style={{ color: theme.text, fontSize: 18 }}>Supplier not found</Text>
+        </SafeAreaView>
+      );
+    }
+
+    // Filter components that match this supplier's products (by name)
+    const supplierProducts = componentsData.filter(comp =>
+      supplier.products.some(supProduct =>
+        comp.name.toLowerCase().includes(supProduct.toLowerCase()) ||
+        supProduct.toLowerCase().includes(comp.name.toLowerCase())
+      )
+    );
 
     const renderHeader = () => (
         <View style={styles.headerContainer}>
@@ -55,7 +59,7 @@ export default function SupplierDetailScreen() {
                     />
                 </View>
                 <Text style={[styles.supplierName, { color: theme.text }]} className='uppercase'>
-                    {id}
+                    {supplier.name}
                 </Text>
                 
                 <View style={styles.ratingRow}>
@@ -65,8 +69,7 @@ export default function SupplierDetailScreen() {
                 </View>
                 
                 <Text style={[styles.bio, { color: theme.gray_text }]}>
-                A Tanzanian company involved in supplying electrical equipment and offering 
-                contracting services for energy and engineering projects.
+                  {supplier.description}
                 </Text>
             </View>
 
@@ -74,15 +77,15 @@ export default function SupplierDetailScreen() {
             <View style={[styles.infoCard, { backgroundColor: theme.light_bg }]}>
                 <Text style={[styles.cardTitle, { color: theme.blue_text }]}>Details</Text>
                 <DetailRow label="Available" value="08:00 – 19:00" />
-                <DetailRow label="Address" value="P.O Box 234 Dar es Salaam" />
-                <DetailRow label="Location" value="Kinondoni, Dar es Salaam" />
+                <DetailRow label="Address" value={supplier.address} />
+                <DetailRow label="Location" value={supplier.location} />
 
-                <View style={[styles.divider, { backgroundColor: theme.border }]} />
+                <View style={[styles.divider, { backgroundColor: theme.gray_text }]} />
 
                 <Text style={[styles.cardTitle, { color: theme.blue_text }]}>Contacts</Text>
-                <DetailRow label="Phone" value="+25534895084589" />
-                <DetailRow label="Email" value="gfcelectrical@gmail.com" />
-                <DetailRow label="Website" value="www.gfcelectrical.com" />
+                <DetailRow label="Phone" value={supplier.phone} />
+                {supplier.email && <DetailRow label="Email" value={supplier.email} />}
+                {supplier.website && <DetailRow label="Website" value={supplier.website} />}
             </View>
 
             {/* Social Media Section */}
@@ -94,14 +97,16 @@ export default function SupplierDetailScreen() {
                 <SocialIcon name="linkedin" color="#0A66C2" />
             </View>
 
-            <Text style={[styles.sectionHeader, { color: theme.text, marginBottom: 25 }]}>Available Products</Text>
+            <Text style={[styles.sectionHeader, { color: theme.text, marginBottom: 25 }]}>
+              Available Products ({supplierProducts.length})
+            </Text>
         </View>
     );
 
   return (
     <SafeAreaView edges={['top']} style={{ backgroundColor: theme.background, flex: 1 }}>
       <FlatList
-        data={SUPPLIER_PRODUCTS}
+        data={supplierProducts}
         ListHeaderComponent={renderHeader}
         keyExtractor={(item) => item.id}
         numColumns={2}
@@ -113,7 +118,17 @@ export default function SupplierDetailScreen() {
                 id={item.id}
                 name={item.name}
                 category={item.category}
-                image={item.image}
+                image={item.imageUrl}
+                onPress={() => {
+                  router.push({
+                    pathname: '/component/[id]',
+                    params: { 
+                      id: item.id,
+                      name: item.name, 
+                      category: item.category 
+                    }
+                  });
+                }}
             />
         )}
       />

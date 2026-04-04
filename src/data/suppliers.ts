@@ -10,7 +10,7 @@ export const suppliers: Supplier[] = [
     phone: "+255 784 567 890",
     email: "info@electrotech.co.tz",
     website: "https://electrotech.co.tz",
-    products: ["Motors", "Circuit Breakers", "Cables", "PLC Systems", "Transformers"],
+    products: ["3-Phase Squirrel Cage Induction Motor", "Siemens S7-1200 PLC", "Circuit Breakers", "Cables", "PLC Systems", "Transformers"],
     priceRange: "Medium to High",
     rating: 4.6,
     // Professional description focused on industrial reliability

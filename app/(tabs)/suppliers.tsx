@@ -15,7 +15,7 @@ const ScreenHeader = ({ searchQuery, setSearchQuery, theme, filteredSuppliers }:
       <View style={[styles.searchBar, { backgroundColor: theme.secondary_background, borderColor: theme.text }]}>
         <Ionicons name="search" size={20} color={theme.text} />
         <TextInput 
-          placeholder="Search by city or company..." 
+          placeholder="Search by name or location..." 
           placeholderTextColor={theme.gray_text}
           style={[styles.searchInput, { color: theme.text }]}
           value={searchQuery}
