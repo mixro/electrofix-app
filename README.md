@@ -1,50 +1,136 @@
-# Welcome to your Expo app 👋
+# ElectroFix - Electrical Problem Solver
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**A powerful offline-first mobile application** for electrical engineering students, technicians, electricians, and industrial professionals in Tanzania and beyond.
 
-## Get started
 
-1. Install dependencies
+## ✨ About the App
 
-   ```bash
-   npm install
-   ```
+ElectroFix is a comprehensive mobile app that bridges theoretical electrical knowledge with real-world practical application. It provides instant access to component information, intelligent fault diagnosis, trusted suppliers, and verified technicians — all designed to improve safety, efficiency, and productivity.
 
-2. Start the app
+## 🚀 Key Features
 
-   ```bash
-   npx expo start
-   ```
+- **Rich Component Library** — Detailed information including function, working principle, ratings, applications, advantages, limitations, maintenance tips, and safety precautions.
+- **Advanced Fault Solver** — Step-by-step troubleshooting with symptoms, causes, tools required, safety warnings, and preventive measures.
+- **Supplier Directory** — Find trusted electrical suppliers with contact details and available products.
+- **Verified Technicians** — Connect with experienced electricians and automation professionals.
+- **Fully Offline Support** — Core data works completely offline (images load from internet when available).
+- **Professional UI** — Clean industrial design with dark/light theme support.
+- **Powerful Search** — Fast search across components and faults.
 
-In the output, you'll find options to open the app in a
+## 🛠 Tech Stack
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- **Frontend**: React Native + Expo
+- **Navigation**: Expo Router (Drawer + Tabs + Stack)
+- **Language**: TypeScript
+- **Styling**: NativeWind (Tailwind CSS) + StyleSheet
+- **State Management**: React Context
+- **Data**: Offline-first static TypeScript data
+- **Icons**: Expo Vector Icons
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## 📁 Project Structure
 
 ```bash
-npm run reset-project
+electrofux-electrofux-app/
+├── app/                          # Expo Router routes
+│   ├── (tabs)/                   # Main bottom tabs
+│   │   ├── index.tsx             # Home Screen
+│   │   ├── components.tsx
+│   │   ├── problem-solver.tsx
+│   │   ├── suppliers.tsx
+│   │   └── technicians.tsx
+│   ├── component/[id].tsx        # Component Detail
+│   ├── category/[slug].tsx       # Category listing
+│   ├── problem-solver/
+│   │   ├── [componentId].tsx
+│   │   └── solution/[faultId].tsx
+│   └── suppliers/[id].tsx
+├── src/
+│   ├── components/ui/            # Reusable UI components
+│   ├── data/                     # All offline data
+│   │   ├── components.ts
+│   │   ├── faults.ts
+│   │   ├── suppliers.ts
+│   │   ├── technicians.ts
+│   │   └── categories.ts
+│   ├── context/                  # ThemeContext
+│   ├── types/                    # TypeScript interfaces
+│   └── hooks/
+├── assets/photos/                # Local images
+└── README.md
+📊 App Modules
 ```
+## 🧪 Target Users
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+* Electrical Engineering Students
+* Industrial Maintenance Technicians
+* Electricians & Contractors
+* Automation Engineers
+* Vocational Trainees
+* Electrical Shop Owners
 
-## Learn more
+## 🔧 Data & Offline Support
 
-To learn more about developing your project with Expo, look at the following resources:
+All critical data is bundled with the app for true offline functionality:
+* **6+** Component Categories
+* Detailed Component Specifications
+* Fault Diagnosis Database
+* Suppliers & Technicians Directory
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+## 🚀 Getting Started
 
-Join our community of developers creating universal apps.
+### Prerequisites
+* **Node.js** (v18+)
+* **Expo CLI**
+* **Android Studio / Xcode** (optional for local simulation)
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Installation
+
+1.  **Clone the repository**
+    ```bash
+    git clone [https://github.com/mixro/electrofix-app.git](https://github.com/mixro/electrofix-app.git)
+    ```
+
+2.  **Navigate to project**
+    ```bash
+    cd electrofix-app
+    ```
+
+3.  **Install dependencies**
+    ```bash
+    npm install
+    ```
+
+4.  **Start development server**
+    ```bash
+    npx expo start
+    ```
+
+### Run on Device
+* Open the **Expo Go** app on your phone.
+* Scan the QR code shown in the terminal.
+
+---
+
+## 📈 Future Roadmap
+
+* [ ] Firebase backend synchronization.
+* [ ] AI-powered image fault diagnosis.
+* [ ] SQLite for advanced offline caching.
+* [ ] Swahili language support.
+* [ ] Technician booking & marketplace.
+* [ ] Certification learning paths.
+
+## 🤝 Contributing
+
+We welcome contributions from the community!
+
+1.  Fork the project.
+2.  Create your feature branch (`git checkout -b feature/amazing-feature`).
+3.  Commit your changes (`git commit -m 'Add amazing feature'`).
+4.  Push to the branch (`git push origin feature/amazing-feature`).
+5.  Open a Pull Request.
+
+---
+*Developed with ⚡ by the MicepDev Team.*

@@ -29,13 +29,21 @@ export default function FaultSolutionScreen() {
     );
   }
 
+  const handleBack = () => {
+    router.replace({
+      pathname: '/fault/[id]',
+      params: { id: componentId, name: componentName,}
+    });
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }}>
       <ScrollView contentContainerStyle={{ paddingBottom: 40 }}>
         
         {/* Header with Back Button */}
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => router.back()} 
+          <TouchableOpacity 
+            onPress={handleBack} 
             style={styles.backButton}
           >
             <Ionicons name="arrow-back" size={28} color={theme.text} />
