@@ -30,16 +30,16 @@ export default function HomeScreen() {
       icon: <MaterialCommunityIcons name="cart" size={32} color="#E31E24" />,
     },
     {
+      title: "Technicians",
+      path: "technicians",
+      desc: "Connect with certified professionals and available local services.",
+      icon: <MaterialCommunityIcons name="account-hard-hat" size={34} color="#E31E24" />,
+    },
+    {
       title: "Learn Electrical",
       path: "problemSolver",
       desc: "Master electrical theory, wiring practices, and safety standards.",
       icon: <MaterialCommunityIcons name="book" size={32} color="#E31E24" />,
-    },
-    {
-      title: "Technicians",
-      path: "technicians",
-      desc: "Connect with certified professionals and available local services.",
-      icon: <FontAwesome5 name="users" size={28} color="#E31E24" />,
     },
     {
       title: "About & Contact",

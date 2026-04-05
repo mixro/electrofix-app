@@ -34,10 +34,10 @@ export default function RootLayout() {
           <Stack.Screen name="technician/[id]" />
           <Stack.Screen name="supplier/[id]" />
           <Stack.Screen name="category/[slug]" />
-          <Stack.Screen name="problemSolver/[id]" />
+          <Stack.Screen name="fault/[id]" />
           
-          <Stack.Screen name="problemSolver/category/[slug]" />
-          <Stack.Screen name="problemSolver/solution/[faultId]" />
+          <Stack.Screen name="faultCategory/[slug]" />
+          <Stack.Screen name="solution/[faultId]" />
         </Stack>
       </Drawer>
 

@@ -42,7 +42,7 @@ export default function ComponentFaultsScreen() {
 
   const handleFaultPress = (fault: any) => {
     router.push({
-      pathname: '/problemSolver/solution/[faultId]',
+      pathname: '/solution/[faultId]',
       params: { 
         faultId: fault.id,
         title: fault.title,
@@ -115,11 +115,12 @@ export default function ComponentFaultsScreen() {
 
 const styles = StyleSheet.create({
   imageContainer: {
-    height: 260,
+    height: 280,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    borderRadius: 8
+    borderRadius: 8,
+    marginTop: 15
   },
   image: {
     width: '90%',
@@ -139,8 +140,8 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     marginBottom: 20,
-},
-searchSection: {
+  },
+  searchSection: {
     paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'center',

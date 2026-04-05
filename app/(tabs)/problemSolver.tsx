@@ -67,7 +67,7 @@ const ScreenHeader = ({ searchQuery, setSearchQuery, theme, filteredComponents, 
               key={index}
               style={[styles.categoryCard, { backgroundColor: theme.cards_background, borderColor: theme.border }]}
             >
-              <Link href={`/problemSolver/category/${cat.id}` as any} asChild>
+              <Link href={`/faultCategory/${cat.id}` as any} asChild>
                 <Pressable>
                   <MaterialCommunityIcons name={cat.iconName} size={28} color="#E31E24" />
                   <Text style={[styles.categoryTitle, { color: theme.text }]}>{cat.title}</Text>
@@ -105,7 +105,7 @@ export default function problemSolver() {
 
   const handleComponentPress = (id: string, name: string, category: string) => {
     router.push({
-      pathname: '/problemSolver/[id]',
+      pathname: '/fault/[id]',
       params: { id, name, category }
     });
   };
@@ -160,7 +160,6 @@ export default function problemSolver() {
           keyboardShouldPersistTaps="handled"
       />      
     </SafeAreaView>
-
   )
 }
 

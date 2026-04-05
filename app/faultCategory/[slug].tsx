@@ -60,7 +60,7 @@ export default function category() {
                     image={item.imageUrl}
                     onPress={() => {
                       router.push({
-                        pathname: '/problemSolver/[id]',
+                        pathname: '/fault/[id]',
                         params: { 
                           id: item.id,
                           name: item.name,

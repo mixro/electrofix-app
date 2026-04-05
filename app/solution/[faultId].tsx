@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, BackHandler } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTheme } from '@/src/context/ThemeContext';
@@ -15,6 +15,7 @@ export default function FaultSolutionScreen() {
 
   const faultId = typeof params.faultId === 'string' ? params.faultId : '';
   const componentName = typeof params.componentName === 'string' ? params.componentName : "Unknown Component";
+  const componentId = typeof params.componentId === 'string' ? params.componentId : "Unknown Component";
 
   // Fetch the specific fault
   const fault = faults.find(f => f.id === faultId);
@@ -34,7 +35,9 @@ export default function FaultSolutionScreen() {
         
         {/* Header with Back Button */}
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+          <TouchableOpacity onPress={() => router.back()} 
+            style={styles.backButton}
+          >
             <Ionicons name="arrow-back" size={28} color={theme.text} />
           </TouchableOpacity>
           <Text style={[styles.faultTitle, { color: theme.text }]} numberOfLines={2}>
