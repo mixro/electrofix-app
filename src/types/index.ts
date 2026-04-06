@@ -15,7 +15,10 @@ export type Component = {
     current?: string;
     power?: string;
     speed?: string;
+    torque?: string;
+    stepAngle?: string;
     efficiency?: string;
+    [key: string]: string | undefined;
   };
   applications: string[];
   advantages: string[];

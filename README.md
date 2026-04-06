@@ -89,7 +89,7 @@ All critical data is bundled with the app for true offline functionality:
 
 1.  **Clone the repository**
     ```bash
-    git clone [https://github.com/mixro/electrofix-app.git](https://github.com/mixro/electrofix-app.git)
+    git clone https://github.com/mixro/electrofix-app.git
     ```
 
 2.  **Navigate to project**

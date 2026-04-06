@@ -120,7 +120,7 @@ export default function components() {
     });
   };
 
-  const featuredComponents = componentsData.slice(0, 8).map((comp, index) => ({
+  const featuredComponents = componentsData.slice(0, 10).map((comp, index) => ({
     id: comp.id,
     name: comp.name,
     category: comp.category,
