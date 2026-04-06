@@ -3,7 +3,7 @@ import { Technician } from '../types';
 export const technicians: Technician[] = [
   {
     id: "tech-001",
-    name: "Eng. Joseph Mwita",
+    name: "Eng. Oscar Karebu",
     profession: "Senior Industrial Electrician",
     location: "Dar es Salaam",
     phone: "+255 765 432 109",

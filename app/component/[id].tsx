@@ -50,10 +50,10 @@ export default function ComponentDetailScreen() {
       <ScrollView showsVerticalScrollIndicator={false}>
         
         {/* Header Image Section */}
-        <View style={[styles.imageHeader, {backgroundColor: theme.cards_background}]}>
+        <View style={[styles.imageHeader]}>
           <Image 
             source={{ uri: component.imageUrl }}
-            style={styles.mainImage} 
+            style={[styles.mainImage, { borderColor: theme.light_gray }]} 
             resizeMode="contain" 
           />
         </View>
@@ -131,8 +131,10 @@ const styles = StyleSheet.create({
     marginTop: 12
   },
   mainImage: {
-    width: '80%',
-    height: '80%',
+    width: '100%',
+    height: '100%',
+    borderWidth: 1,
+    borderRadius: 8,
   },
   contentContainer: {
     paddingTop: 20,

@@ -21,12 +21,12 @@ export default function ComponentCard({ id, name, category, image, onPress }: Co
     >
       <View style={styles.imageContainer}>
           <Image 
-              source={image} 
+              source={{ uri: image}} 
               style={styles.image}
               resizeMode="contain"
           />
       </View>
-      <View style={[styles.info, {backgroundColor: theme.background}]}>
+      <View style={[styles.info, {backgroundColor: theme.background, borderTopColor: theme.toast_background}]}>
           <Text style={[styles.name, { color: theme.text }]} numberOfLines={1}>
               {name}
           </Text>
@@ -54,15 +54,18 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: 'center',
     justifyContent: 'center',
+    width:'100%',
     height: 140,
     maxHeight: 140,
   },
   image: {
-    width: '80%',
-    objectFit: 'contain'
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover'
   },
   info: {
     padding: 12,
+    borderTopWidth: 0.5,
   },
   name: {
     fontSize: 15,

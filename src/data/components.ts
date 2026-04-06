@@ -9,7 +9,7 @@ export const componentsData: Component[] = [
     name: "3-Phase Squirrel Cage Induction Motor",
     slug: "3-phase-squirrel-cage-induction-motor",
     category: "Electrical Machines",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://cdn.moglix.com/p/kqrXC7Gm24sK3-xxlarge.jpg",
     shortDescription: "The most widely used industrial motor for pumps, fans, compressors, and conveyors.",
 
     function: "Converts electrical energy into mechanical rotational energy",
@@ -46,7 +46,7 @@ export const componentsData: Component[] = [
     name: "DC Shunt Motor",
     slug: "dc-shunt-motor",
     category: "Electrical Machines",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://static1.industrybuying.com/products/motors-power-transmission/dc-motors/general-purpose-dc-motors/MOT.GEN.58521381_1679653590687.webp",
     shortDescription: "Constant speed motor widely used where precise speed control is required.",
 
     function: "Converts DC electrical energy into mechanical energy with nearly constant speed",
@@ -80,7 +80,7 @@ export const componentsData: Component[] = [
     name: "DC Series Motor",
     slug: "dc-series-motor",
     category: "Electrical Machines",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdNS5sYbnQ1BpB4-u4NaD8QN7cdKhJhx2WLQ&s",
     shortDescription: "High starting torque motor used in traction and heavy load applications.",
 
     function: "Provides very high starting torque for heavy load applications",
@@ -111,7 +111,7 @@ export const componentsData: Component[] = [
     name: "Slip Ring Induction Motor",
     slug: "slip-ring-induction-motor",
     category: "Electrical Machines",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZV1pdedtoG4iRRaO8WMgxLD1tZalySu1Rnw&s",
     shortDescription: "Wound rotor induction motor with external resistance for better starting torque and speed control.",
 
     function: "Converts electrical energy to mechanical energy with high starting torque",
@@ -142,7 +142,7 @@ export const componentsData: Component[] = [
     name: "Single Phase Induction Motor",
     slug: "single-phase-induction-motor",
     category: "Electrical Machines",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjRFPpp7E3eJntbB8HhIc8fbcCBSR-ipu5ZQ&s",
     shortDescription: "Commonly used in domestic and light industrial applications.",
 
     function: "Converts single-phase AC power into mechanical energy",
@@ -173,7 +173,7 @@ export const componentsData: Component[] = [
     name: "Synchronous Motor",
     slug: "synchronous-motor",
     category: "Electrical Machines",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1GKQOGvuCajy6DF-Zr-pncj8n8UF6kr3alQ&s",
     shortDescription: "Constant speed motor used for power factor correction and high-precision industrial drives.",
 
     function: "Converts AC electrical power into mechanical power at a fixed synchronous speed.",
@@ -207,7 +207,7 @@ export const componentsData: Component[] = [
     name: "Universal Motor",
     slug: "universal-motor",
     category: "Electrical Machines",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq3QjBwO5CKFkolHeWQiZ-wQkZwycSza5q8w&s",
     shortDescription: "A high-speed motor that can operate on both AC and DC power.",
 
     function: "High-torque, high-speed motor for portable tools and appliances.",
@@ -240,7 +240,7 @@ export const componentsData: Component[] = [
     name: "Stepper Motor",
     slug: "stepper-motor",
     category: "Electrical Machines",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://www.automate.org/userAssets/mcaUploads/image/What%20Kinds%20of%20Applications%20are%20Best%20for%20Stepper%20Motors.jpeg",
     shortDescription: "Brushless DC motor that divides a full rotation into a number of equal steps for precise positioning.",
 
     function: "Provides precise angular positioning and speed control without feedback sensors.",
@@ -273,7 +273,7 @@ export const componentsData: Component[] = [
     name: "Servo Motor (AC/DC)",
     slug: "servo-motor",
     category: "Electrical Machines",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://www.ato.com/content/images/thumbs/0009759_12-kw-ac-servo-motor-4-nm12-nm-3000-rpm_550.jpeg",
     shortDescription: "High-performance motor with feedback for precise control of velocity, acceleration, and position.",
 
     function: "Used in closed-loop systems for high-precision motion control.",
@@ -306,7 +306,7 @@ export const componentsData: Component[] = [
     name: "Permanent Magnet DC (PMDC) Motor",
     slug: "pmdc-motor",
     category: "Electrical Machines",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBGB70WbY7DEuWAHji0FvyRdMXWG6He5HROQ&s",
     shortDescription: "A DC motor using permanent magnets instead of field windings.",
 
     function: "Commonly used in small-scale applications and battery-operated devices.",
@@ -341,7 +341,7 @@ export const componentsData: Component[] = [
     name: "Distribution Transformer",
     slug: "distribution-transformer",
     category: "Power Components",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjXf0Sd79UtlEmqHE7gAeLqObaXjiFS_v40A&s",
     shortDescription: "Steps down high voltage to usable low voltage for distribution.",
 
     function: "Transfers electrical energy between circuits through electromagnetic induction",
@@ -366,7 +366,7 @@ export const componentsData: Component[] = [
     name: "Air Circuit Breaker (ACB)",
     slug: "air-circuit-breaker-acb",
     category: "Power Components",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://iallway.com/wp-content/uploads/2024/02/78805a221a988e79ef3f.png",
     shortDescription: "High-current protection device used in main low-voltage distribution boards.",
 
     function: "Protects high-power electrical circuits (above 800A) from overcurrent, short circuits, and earth faults.",
@@ -399,7 +399,7 @@ export const componentsData: Component[] = [
     name: "Automatic Power Factor Correction (APFC) Bank",
     slug: "apfc-capacitor-bank",
     category: "Power Components",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://tekwin.in/wp-content/webp-express/webp-images/uploads/2022/07/222.jpg.webp",
     shortDescription: "A group of capacitors used to improve power factor and reduce electricity costs.",
 
     function: "Offsets reactive power (kVAR) caused by inductive loads (motors/transformers) to improve efficiency.",
@@ -432,7 +432,7 @@ export const componentsData: Component[] = [
     name: "Automatic Voltage Regulator (AVR)",
     slug: "automatic-voltage-regulator-avr",
     category: "Power Components",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://image.made-in-china.com/202f0j00dnOcTBjyeFbz/Mingch-High-Quality-220V-Single-Phase-Automatic-Voltage-Regulator-AVR-2kVA-5kVA-10kVA-AC-Current-Input-for-Tnd-Usage.webp",
     shortDescription: "Maintains a constant voltage level to protect sensitive equipment from fluctuations.",
 
     function: "Automatically corrects voltage sags and surges to provide a stable output.",
@@ -468,7 +468,7 @@ export const componentsData: Component[] = [
     name: "Siemens S7-1200 PLC",
     slug: "siemens-s7-1200-plc",
     category: "Control & Automation",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://media.rs-online.com/image/upload/bo_1.5px_solid_white,b_auto,c_pad,dpr_2,f_auto,h_399,q_auto,w_710/c_pad,h_399,w_710/R8624468-01?pgw=1",
     shortDescription: "Compact and powerful programmable logic controller for automation.",
 
     function: "Controls industrial processes and machinery through programmed logic",
@@ -492,7 +492,7 @@ export const componentsData: Component[] = [
     name: "Variable Frequency Drive (VFD)",
     slug: "variable-frequency-drive-vfd",
     category: "Control & Automation",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://image.made-in-china.com/202f0j00ZBcqCIFSpobk/Ycb3000-High-Performance-Current-Vector-Frequency-Converter-Variable-0-75-1000kw-Frequency-Drive-Vf-Control-VFD.webp",
     shortDescription: "Electronic device used to control motor speed and torque by varying frequency.",
 
     function: "Regulates the speed of AC induction motors for energy saving and process control.",
@@ -525,7 +525,7 @@ export const componentsData: Component[] = [
     name: "Magnetic Contactor",
     slug: "magnetic-contactor",
     category: "Control & Automation",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIZl3prxYXC8inteSUT-eDKlye8AlnTzHg4Q&s",
     shortDescription: "Electrically controlled switch used for switching a power circuit.",
 
     function: "Frequently makes and breaks high-current power circuits to motors and heaters.",
@@ -558,7 +558,7 @@ export const componentsData: Component[] = [
     name: "Thermal Overload Relay (TOR)",
     slug: "thermal-overload-relay",
     category: "Control & Automation",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStU9sQejvrlEzfb_1o2FNNcUsMJd29AHxb3Q&s",
     shortDescription: "Protective device that prevents motors from burning out due to overload.",
 
     function: "Trips the control circuit when the motor draws excessive current for too long.",
@@ -590,7 +590,7 @@ export const componentsData: Component[] = [
     name: "Inductive Proximity Sensor",
     slug: "inductive-proximity-sensor",
     category: "Control & Automation",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://lorentzzi.com/wp-content/uploads/2023/03/LM24-inductive-sensor-2.jpg",
     shortDescription: "Non-contact sensor used to detect the presence of metallic objects.",
 
     function: "Detects metal targets without physical contact in automated machinery.",
@@ -626,7 +626,7 @@ export const componentsData: Component[] = [
     name: "4-Core Armoured Power Cable",
     slug: "4-core-armoured-power-cable",
     category: "Cables & Accessories",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://image.made-in-china.com/365f3j00EmSqvpjFlHkz/4-Core-16mm-25mm-35mm-50mm-70mm-95mm-120mm-150mm-185mm-240mm-Copper-Aluminum-Armoured-Power-Cable-Price.webp",
     shortDescription: "Heavy duty cable suitable for underground and outdoor installation.",
 
     function: "Transmits electrical power safely over distance",
@@ -650,7 +650,7 @@ export const componentsData: Component[] = [
     name: "NYY Flexible Power Cable",
     slug: "nyy-flexible-power-cable",
     category: "Cables & Accessories",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR__cCHXSlFQ2Q70V0ivX5lD9ptXqhNpUwksg&s",
     shortDescription: "Versatile PVC insulated power and control cable for fixed installations.",
 
     function: "Transmits electrical energy in energy stations, industrial plants, and local grids.",
@@ -683,7 +683,7 @@ export const componentsData: Component[] = [
     name: "XLPE Armoured Power Cable",
     slug: "xlpe-armoured-power-cable",
     category: "Cables & Accessories",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://image.made-in-china.com/365f3j00eozcltUJHLbD/Armored-Cable-Suppliers-Pure-Copper-XLPE-Insulation-Armoured-Swa-Power-Cable-4-Core-25mm.webp",
     shortDescription: "Cross-linked Polyethylene insulated cable with steel wire armoring for heavy-duty use.",
 
     function: "Primary power feeder for heavy industrial loads and underground mains.",
@@ -716,7 +716,7 @@ export const componentsData: Component[] = [
     name: "Industrial Cable Gland (CW/BW)",
     slug: "industrial-cable-gland",
     category: "Cables & Accessories",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://m.media-amazon.com/images/I/51n-wsXX05L._AC_UF894,1000_QL80_.jpg",
     shortDescription: "Mechanical cable entry device used to attach and secure the end of a cable to equipment.",
 
     function: "Provides strain relief, sealing, and electrical continuity for cable armor.",
@@ -749,7 +749,7 @@ export const componentsData: Component[] = [
     name: "Copper Compression Lug",
     slug: "copper-compression-lug",
     category: "Cables & Accessories",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://www.nexans.co.uk/.rest/eservice/dam/v1/image/243434?variant=856x856&scaleType=FILL",
     shortDescription: "Connector used for terminating large power cables to busbars or switchgear terminals.",
 
     function: "Ensures a high-conductivity, low-resistance mechanical connection between cable and terminal.",
@@ -785,7 +785,7 @@ export const componentsData: Component[] = [
     name: "100A Molded Case Circuit Breaker (MCCB)",
     slug: "100a-mccb",
     category: "Protection Devices",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://image.made-in-china.com/2f0j00GuAcdfOghzpI/100A-MCCB-Moulded-Case-Circuit-Breakers-Case-Busbar-3p-Main-Circuit-Breaker.webp",
     shortDescription: "Provides overload and short circuit protection for electrical circuits.",
 
     function: "Protects electrical circuits from overload and short circuits",
@@ -810,7 +810,7 @@ export const componentsData: Component[] = [
     name: "Residual Current Circuit Breaker (RCCB/RCD)",
     slug: "rccb-residual-current-device",
     category: "Protection Devices",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://toolssavvy.ph/cdn/shop/files/NL1-63-63A-2P-RCCB-3.png?v=1769742793",
     shortDescription: "Life-saving device that detects earth leakage and prevents electric shock.",
 
     function: "Protects people from electrocution and prevents fires caused by earth faults.",
@@ -843,7 +843,7 @@ export const componentsData: Component[] = [
     name: "Surge Protective Device (SPD)",
     slug: "surge-protection-spd",
     category: "Protection Devices",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://image.made-in-china.com/202f0j00RQTboPGrRqcV/385V-AC-SPD-Current-Surge-Arrester-Protection-Protector.webp",
     shortDescription: "Protects sensitive electronics from high-voltage spikes and lightning strikes.",
 
     function: "Limits transient voltages by diverting surge currents to the ground.",
@@ -876,7 +876,7 @@ export const componentsData: Component[] = [
     name: "Motor Protection Circuit Breaker (MPCB)",
     slug: "motor-protection-circuit-breaker",
     category: "Protection Devices",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_iEqpgM7QJ3My96t7v38KdxUo4EnOWen3rA&s",
     shortDescription: "Integrated device providing thermal, magnetic, and phase-loss protection for motors.",
 
     function: "Combines the functions of an MCB and an Overload Relay into a single unit for motor control.",
@@ -909,7 +909,7 @@ export const componentsData: Component[] = [
     name: "High Rupturing Capacity (HRC) Fuse",
     slug: "hrc-fuse",
     category: "Protection Devices",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh9XJhctGYC4VbLqMWUPFu0gBHRekz7vX_1g&s",
     shortDescription: "High-reliability fuse capable of interrupting very high fault currents.",
 
     function: "Provides final backup protection for cables and heavy industrial equipment.",
@@ -944,7 +944,7 @@ export const componentsData: Component[] = [
     name: "Current Transformer (CT)",
     slug: "current-transformer",
     category: "Instrumentation",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://www.cn-delixi.com/wp-content/uploads/2024/01/image-25.webp",
     shortDescription: "Steps down high current to low current for safe measurement.",
 
     function: "Measures high alternating currents safely",
@@ -968,7 +968,7 @@ export const componentsData: Component[] = [
     name: "Digital Multimeter (DMM)",
     slug: "digital-multimeter",
     category: "Instrumentation",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://cdn11.bigcommerce.com/s-sgprcd6/images/stencil/1280x1280/products/707/16195/TECPEL_Electricals_and_Electronics_Testing_Multimeters_DMM-8060__44742.1682857612.jpg?c=2",
     shortDescription: "The essential diagnostic tool for measuring voltage, current, and resistance.",
 
     function: "Measures multiple electrical properties to troubleshoot circuits and components.",
@@ -1001,7 +1001,7 @@ export const componentsData: Component[] = [
     name: "3-Phase Digital Energy Meter",
     slug: "3-phase-energy-meter",
     category: "Instrumentation",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://image.made-in-china.com/202f0j00kMwiJqnrwWGe/DC-Smart-Electricity-3-Phase-Kwh-Modbus-RTU-Energy-Meter-Power-Meter-for-Current-Energy-Measurment.webp",
     shortDescription: "Records electrical energy consumption for billing and monitoring.",
 
     function: "Measures and displays total energy consumption (kWh), voltage, current, and power factor.",
@@ -1034,7 +1034,7 @@ export const componentsData: Component[] = [
     name: "Digital Frequency Meter",
     slug: "digital-frequency-meter",
     category: "Instrumentation",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://5.imimg.com/data5/SELLER/Default/2023/11/361903052/CY/ZG/YO/19451612/ems-13a-2866.jpg",
     shortDescription: "Displays the frequency of an AC power system (Hz).",
 
     function: "Monitors the stability of the AC supply, critical for generator operations.",
@@ -1067,7 +1067,7 @@ export const componentsData: Component[] = [
     name: "Digital Earth Resistance Tester",
     slug: "earth-resistance-tester",
     category: "Instrumentation",
-    imageUrl: "https://images.unsplash.com/photo-1581092160607-4c5f9c3c3e6e",
+    imageUrl: "https://www.kewtechcorp.com/media/uploads/2021/11/KEW4105A-cropped-1024x938.png",
     shortDescription: "Specialized tool used to measure the resistance of grounding systems.",
 
     function: "Ensures that the earthing system is effective enough to safely divert fault currents.",

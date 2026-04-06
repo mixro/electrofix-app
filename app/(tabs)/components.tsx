@@ -120,12 +120,29 @@ export default function components() {
     });
   };
 
-  const featuredComponents = componentsData.slice(0, 10).map((comp, index) => ({
-    id: comp.id,
-    name: comp.name,
-    category: comp.category,
-    image: require('@/assets/photos/generator.png') || comp.imageUrl, // fallback
-  }));
+  const featuredComponents = useMemo(() => {
+    const grouped = componentsData.reduce((acc, comp) => {
+      if (!acc[comp.category]) acc[comp.category] = [];
+      acc[comp.category].push(comp);
+      return acc;
+    }, {} as Record<string, any[]>);
+
+    const featured: any[] = [];
+
+    Object.values(grouped).forEach((categoryComps) => {
+      const selected = categoryComps.slice(0, 2); // Take 2 per category
+      selected.forEach((comp) => {
+        featured.push({
+          id: comp.id,
+          name: comp.name,
+          category: comp.category,
+          image: comp.imageUrl 
+        });
+      });
+    });
+
+    return featured;
+  }, []);
 
   return (
     <SafeAreaView  edges={['top']}  style={{ backgroundColor: theme.background, flex: 1 }} className='px-4'>
