@@ -80,7 +80,7 @@ export default function TabLayout() {
           name="suppliers"
           options={{
             title: 'Suppliers',
-            tabBarIcon: ({ color }) => <MaterialCommunityIcons name="truck-delivery" size={20} color={color} />,
+            tabBarIcon: ({ color }) => <MaterialCommunityIcons name="cart" size={20} color={color} />,
             tabBarLabel: ({ focused }) => (
               <Text
                 className={focused ? 'font-bold' : ''}

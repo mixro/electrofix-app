@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useMemo, useState } from 'react';
+import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTheme } from '@/src/context/ThemeContext';
@@ -12,6 +12,7 @@ export default function ComponentFaultsScreen() {
   const { theme } = useTheme();
   const router = useRouter();
   const { id, name, category } = useLocalSearchParams();
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Fetch real component data
   const component = getComponentById(typeof id === 'string' ? id : '');
@@ -21,8 +22,16 @@ export default function ComponentFaultsScreen() {
 
   // Fetch faults related to this component
   const componentFaults = useMemo(() => {
-    return getFaultsByComponentId(typeof id === 'string' ? id : '');
-  }, [id]);
+    const faults = getFaultsByComponentId(typeof id === 'string' ? id : '');
+    if (!searchQuery.trim()) return faults
+    
+    const query = searchQuery.toLowerCase().trim();
+
+    return faults.filter(fault => 
+      fault.title.toLowerCase().includes(query) ||
+      fault.category.toLowerCase().includes(query)
+    );
+  }, [id, searchQuery]);
 
   // Group faults by category for accordion display
   const faultCategories = useMemo(() => {
@@ -52,17 +61,15 @@ export default function ComponentFaultsScreen() {
     });
   };
 
-  // Fallback image (you can improve this later)
-  const motorImage = require('@/assets/photos/generator.png');
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }} className='px-4'>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Large Component Image */}
-        <View style={[styles.imageContainer, {backgroundColor: theme.cards_background}]}>
+        <View style={[styles.imageContainer]}>
           <Image 
-            source={component?.imageUrl ? { uri: component.imageUrl } : motorImage}
-            style={styles.image} 
+            source={{ uri: component?.imageUrl }}
+            style={[styles.image, { borderColor: theme.light_gray }]} 
             resizeMode="contain" 
           />
         </View>
@@ -81,9 +88,14 @@ export default function ComponentFaultsScreen() {
         <View style={styles.searchContainer}>
           <View style={[styles.searchSection, { borderColor: theme.text }]}>
             <Ionicons name="search" size={20} color={theme.gray_text} style={{ marginRight: 10 }} />
-            <Text style={[styles.searchInput, { color: theme.text }]}>
-              Search faults for this component...
-            </Text>
+            <TextInput
+              style={[styles.searchInput, { color: theme.text }]}
+              placeholder="Search faults for this component..."
+              placeholderTextColor={theme.gray_text}
+              value={searchQuery}
+              onChangeText={setSearchQuery} // Updates state without unmounting
+              autoCapitalize="none"
+            />
           </View>
         </View>
 
@@ -115,16 +127,18 @@ export default function ComponentFaultsScreen() {
 
 const styles = StyleSheet.create({
   imageContainer: {
-    height: 280,
+    width: '100%',
+    height: 300,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
     borderRadius: 8,
     marginTop: 15
   },
   image: {
-    width: '90%',
+    width: '100%',
     height: '100%',
+    borderWidth: 1,
+    borderRadius: 8,
   },
   infoContainer: {
     paddingVertical: 16,

@@ -31,7 +31,7 @@ export default function sidebar() {
             </Link>
             <Link href='/(tabs)/suppliers' className='mb-3'>
                 <View className='flex-row items-center gap-5' style={[{backgroundColor: theme.menu_button}, styles.item]}>
-                    <MaterialCommunityIcons name="truck-delivery" color={theme.icons} size={24} />
+                    <MaterialCommunityIcons name="cart" color={theme.icons} size={24} />
                     <Text className='text-lg font-bold' style={{color: theme.darker_text}}>Suppliers</Text>
                 </View>
             </Link>
