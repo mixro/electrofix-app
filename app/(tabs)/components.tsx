@@ -13,7 +13,7 @@ const ScreenHeader = ({ searchQuery, setSearchQuery, theme, filteredComponents, 
     <View>
       {/* Search Bar */}
       <View style={styles.searchContainer}>
-        <View style={[styles.searchSection, { borderColor: theme.text }]}>
+        <View style={[styles.searchSection, { borderColor: theme.icons }]}>
           <TextInput
             style={[styles.input, { color: theme.text }]}
             placeholder="Search components..."
@@ -198,8 +198,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 2,
     borderRadius: 12,
-    height: 52,
-    paddingLeft: 18,
+    height: 45,
+    paddingLeft: 10,
     paddingRight: 3,
   },
   input: {
@@ -208,8 +208,8 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   iconCircle: {
-    width: 44,
-    height: 44,
+    width: 38,
+    height: 38,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',

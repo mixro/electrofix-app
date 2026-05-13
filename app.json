@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "electrofix-app",
+    "name": "ElectroFix",
     "slug": "electrofix-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "electrofixapp",
+    "scheme": "electrofix",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -36,6 +36,7 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",
           "dark": {
+            "image": "./assets/images/splash-icon-dark.png",
             "backgroundColor": "#000000"
           }
         }

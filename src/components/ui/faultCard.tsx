@@ -2,27 +2,40 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
 import { useTheme } from '@/src/context/ThemeContext';
 
-export default function FaultCard({ title, desc }: { title: string; desc: string }) {
+export default function FaultCard({id, title, desc }: { id: string,title: string; desc: string }) {
   const { theme } = useTheme();
 
   return (
-    <TouchableOpacity
-      activeOpacity={0.7}
-      style={[ styles.faultCard, { backgroundColor: theme.secondary_background, shadowColor: theme.text, borderColor: theme.toast_background }]}
-    >
-        <Text style={[styles.faultTitle, { color: theme.text }]}>
-            {title}
-        </Text>
-        <Text style={[styles.faultDesc, { color: theme.text }]}>
-            {desc}
-        </Text>
-    </TouchableOpacity>
+    <View>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        style={[ styles.faultCard, { backgroundColor: theme.secondary_background, shadowColor: theme.text, borderColor: theme.toast_background }]}
+      >
+          <View style={styles.faultTitle}>
+              <View style={styles.number}>
+                <Text style={{color: "white"}}>{id}</Text>  
+              </View> 
+              
+              <Text style={{color: theme.text}} className='text-xl font-bold'>{title}</Text>
+          </View>
+
+          <Text style={[styles.faultDesc, { color: theme.text }]}>
+              {desc}
+          </Text>
+      </TouchableOpacity>
+
+      {(id === '1') && 
+        <View className='mb-5'>
+          <Text style={{color: theme.green_text}} className='text-center text-xl font-bold'>OR</Text>
+        </View>
+      }
+    </View>
   );
 }
 
 
 const styles = StyleSheet.create({
-    listContent: {
+  listContent: {
     paddingBottom: 40,
   },
   faultCard: {
@@ -41,6 +54,19 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '700',
     marginBottom: 12,
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "row",
+    gap: 10
+  },
+  number: {
+    backgroundColor: "green",
+    borderRadius: 50,
+    width: 28,
+    height: 28,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   },
   faultDesc: {
     fontSize: 15,

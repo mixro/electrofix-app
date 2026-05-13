@@ -17,7 +17,7 @@ const ScreenHeader = ({ searchQuery, setSearchQuery, theme, filteredComponents, 
 
       {/* Search Bar */}
       <View style={styles.searchContainer}>
-        <View style={[styles.searchSection, { borderColor: theme.text }]}>
+        <View style={[styles.searchSection, { borderColor: theme.icons }]}>
           <TextInput
             style={[styles.input, { color: theme.text }]}
             placeholder="Search components..."
@@ -26,7 +26,7 @@ const ScreenHeader = ({ searchQuery, setSearchQuery, theme, filteredComponents, 
             onChangeText={setSearchQuery} // Updates state without unmounting
             autoCapitalize="none"
           />
-          <View style={[styles.iconCircle, { backgroundColor: theme.text }]}>
+          <View style={[styles.iconCircle, { backgroundColor: theme.icons }]}>
             <Ionicons name="search" size={24} color={theme.background} />
           </View>
         </View>
@@ -76,8 +76,8 @@ const ScreenHeader = ({ searchQuery, setSearchQuery, theme, filteredComponents, 
             </TouchableOpacity>
           ))}
         </View>
-        <Text style={[styles.sectionTitle, { color: theme.red_button, marginTop: 40 }]}>
-          Common Faults
+        <Text style={[styles.sectionTitle, { color: theme.text, marginTop: 40 }]}>
+          Steps to Fix Fault
         </Text>
       </View>
     </View>
@@ -110,33 +110,23 @@ export default function problemSolver() {
     });
   };
 
-  const commonFaults = [
+  const fixingSteps = [
     {
       id: '1',
-      title: 'Overheating & Thermal Issues',
-      desc: 'Excessive temperature rise in equipment caused by overloading, poor ventilation, or cooling failure, which can damage insulation and reduce lifespan.',
+      title: 'Quick Search Path',
+      desc: 'Search in Topbar → Components Screen (with results) → Select Component → Fault Categories → Select Fault → Solution',
     },
     {
       id: '2',
-      title: 'Starting & Running Problems',
-      desc: 'Difficulties in starting or maintaining normal operation, often due to low voltage, faulty capacitors, or mechanical load issues.',
-    },
-    {
-      id: '3',
-      title: 'Mechanical & Vibration Issues',
-      desc: 'Physical faults like misalignment, worn bearings, or imbalance that cause vibration, noise, and possible mechanical damage.',
-    },
-    {
-      id: '4',
-      title: 'Protection & Tripping Problems',
-      desc: 'Frequent or unexpected shutdowns triggered by protective devices due to overloads, faults, or incorrect settings.',
+      title: 'Browse Path',
+      desc: 'Categories → Select Category → Select Component → Fault Categories → Select Fault → Solution',
     },
   ];
   
   return (
     <SafeAreaView edges={['top']} style={{ backgroundColor: theme.background, minHeight: "100%" }} className='px-4'>
       <FlatList
-          data={commonFaults}
+          data={fixingSteps}
           keyExtractor={(item) => item.id}
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={
@@ -152,6 +142,7 @@ export default function problemSolver() {
           renderItem={({ item }) => 
               <FaultCard
                   key={item.id}
+                  id={item.id}
                   title={item.title}
                   desc={item.desc}
               />
@@ -173,9 +164,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 2,
     borderRadius: 12,
-    height: 52,
-    paddingLeft: 18,
-    paddingRight: 3,
+    height: 45,
+    paddingLeft: 10,
+    paddingRight: 2,
   },
   input: {
     flex: 1,
@@ -183,8 +174,8 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   iconCircle: {
-    width: 44,
-    height: 44,
+    width: 38,
+    height: 38,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -268,3 +259,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 });
+
+  git config --global user.email "josephchongola43@gmail.com"
+  git config --global user.name "mixro"
